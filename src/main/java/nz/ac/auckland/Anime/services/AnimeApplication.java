@@ -7,7 +7,9 @@ import nz.ac.auckland.Anime.domain.*;
 import javax.persistence.EntityManager;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +35,7 @@ public class AnimeApplication extends Application {
       singletons.add(new AnimeResource());
       singletons.add(new ReviewResource());
       singletons.add(new RatingResource());
+      singletons.add(new ForumResource());
       singletons.add(PersistenceManager.instance());
       setupDummyEntries();
    }
@@ -41,16 +44,36 @@ public class AnimeApplication extends Application {
       PersistenceManager p = PersistenceManager.instance();
       EntityManager em = p.createEntityManager();
       em.getTransaction().begin();
+
+      //Creating a user dummy obj
       User user = new User("ben1","ben2","ben3");
       em.persist(user);
+
+      //Creating a anime dummy obj
       Anime anime = new Anime("umaruChan", 12, 2016, "Jun Xu");
       em.persist(anime);
+
+      //Creating a review dummy obj
       Review review = new Review(anime, user, "hello");
       em.persist(review);
+
+      //Creating a rating dummy obj
       Rating rating = new Rating(anime, user, "uo", 5);
       em.persist(rating);
+
+      //Creating a forum dummy obj
+      Comment comment = new Comment(user, "this is a comment", 1900);
+      List<User> moderators = new ArrayList<User>();
+      moderators.add(user);
+      List<Comment> comments = new ArrayList<Comment>();
+      comments.add(comment);
+
+      Forum forum = new Forum( moderators, comments, anime );
+      em.persist(forum);
+
       em.getTransaction().commit();
       em.close();
+
    }
 
    @Override

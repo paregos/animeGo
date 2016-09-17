@@ -1,35 +1,36 @@
-package nz.ac.auckland.Anime.domain;
+package nz.ac.auckland.Anime.dto;
 
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by Ben on 9/17/2016.
  */
-@Embeddable
-public class Comment {
+@XmlRootElement(name="Comment")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class CommentDTO {
 
-    @ManyToOne
-    private User commenter;
+    private UserDTO commenter;
 
     private String comment;
 
     private int date;
 
-    public Comment() {
+    public CommentDTO() {
     }
 
-    public Comment(User commenter, String comment, int date) {
+    public CommentDTO(UserDTO commenter, String comment, int date) {
         this.commenter = commenter;
         this.comment = comment;
         this.date = date;
     }
 
-    public User getCommenter() {
+    public UserDTO getCommenter() {
         return commenter;
     }
 
-    public void setCommenter(User commenter) {
+    public void setCommenter(UserDTO commenter) {
         this.commenter = commenter;
     }
 

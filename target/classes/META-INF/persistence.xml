@@ -26,6 +26,8 @@
 			<class>nz.ac.auckland.Anime.domain.Anime</class>
 			<class>nz.ac.auckland.Anime.domain.Review</class>
 			<class>nz.ac.auckland.Anime.domain.Rating</class>
+			<class>nz.ac.auckland.Anime.domain.Forum</class>
+			<class>nz.ac.auckland.Anime.domain.Content</class>
 
 		<properties>
 			<!--  Configure the data source. In this case the embedded H2 database

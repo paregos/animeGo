@@ -1,7 +1,10 @@
 package nz.ac.auckland.Anime.domain;
 
+import nz.ac.auckland.Anime.dto.AnimeDTO;
+
 import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import java.util.List;
 
 /**
  * Created by Ben on 9/17/2016.
@@ -14,64 +17,58 @@ public class Forum {
     private Long _id;
 
     @ManyToMany
-    private Set<User> commenters;
+    @JoinTable(name="Moderators", joinColumns=@JoinColumn(name="ForumID"),
+            inverseJoinColumns = @JoinColumn(name="userID"))
+    private List<User> moderators;
 
-    @ManyToMany
-    private Set<User> moderators;
+    @ElementCollection
+    private List<Comment> comments;
 
-    @OneToMany
-    private Set<Comment> comments;
-
-    private Topic topic;
+    @ManyToOne
+    private Anime animeTopic;
 
     public Forum() {
     }
 
-    public Forum(Set<User> commenters, Set<User> moderators, Set<Comment> comments, Topic topic) {
-        this.commenters = commenters;
+    public Forum(List<User> moderators, List<Comment> comments, Anime topic) {
         this.moderators = moderators;
         this.comments = comments;
-        this.topic = topic;
+        this.animeTopic = topic;
     }
 
-    public Forum(Long _id, Set<User> commenters, Set<User> moderators, Set<Comment> comments, Topic topic) {
+    public Forum(Long _id, List<User> moderators, List<Comment> comments, Anime topic) {
         this._id = _id;
-        this.commenters = commenters;
         this.moderators = moderators;
         this.comments = comments;
-        this.topic = topic;
+        this.animeTopic = topic;
     }
 
-    public Set<User> getCommenters() {
-        return commenters;
+    public Long getId() {
+        return _id;
     }
 
-    public void setCommenters(Set<User> commenters) {
-        this.commenters = commenters;
-    }
-
-    public Set<User> getModerators() {
+    public List<User> getModerators() {
         return moderators;
     }
 
-    public void setModerators(Set<User> moderators) {
+    public void setModerators(List<User> moderators) {
         this.moderators = moderators;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public Anime getAnimeTopic() {
+        return animeTopic;
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setAnimeTopic(Anime animeTopic) {
+        this.animeTopic = animeTopic;
     }
-    
+
 }
