@@ -51,4 +51,16 @@ public class Review {
     public String getReview() {
         return review;
     }
+
+    public void setShow(Anime show) {
+        this.show = show;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
 }

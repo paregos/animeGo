@@ -2,7 +2,6 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.PersistenceManager;
 import nz.ac.auckland.Anime.domain.Rating;
-import nz.ac.auckland.Anime.domain.Review;
 import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.RatingDTO;
 import nz.ac.auckland.Anime.dto.UserDTO;
@@ -26,6 +25,34 @@ public class RatingResource {
     // Setup a Logger.
     private static Logger _logger = LoggerFactory
             .getLogger(RatingResource.class);
+
+
+    @PUT
+    @Path ("{id}")
+    @Consumes({"application/xml","application/json"})
+    public Response editRating(RatingDTO is, @PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        //getting the post request
+        Rating newRating = RatingMapper.toDomainModel(is);
+
+        //finding the associated rating
+        Rating rating = em.find(Rating.class, new Long(id));
+
+        rating.setReview(newRating.getReview());
+        rating.setShow(newRating.getShow());
+        rating.setUser(newRating.getUser());
+        rating.setScore(newRating.getScore());
+
+        em.persist(rating);
+        em.getTransaction().commit();
+        em.close();
+
+        return Response.created(URI.create("/Rating/" + rating.getId())).build();
+    }
 
     @POST
     @Consumes({"application/xml","application/json"})

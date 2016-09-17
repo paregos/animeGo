@@ -9,8 +9,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long _id;
-	
-	@Column(unique=true)
+
 	private String username;
 	
 	private String lastname;
@@ -69,4 +68,20 @@ public class User {
     public Set<User> getFollowers() {
         return followers;
     }
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public void setFollowers(Set<User> followers) {
+		this.followers = followers;
+	}
 }

@@ -28,6 +28,34 @@ public class AnimeResource {
     private static Logger _logger = LoggerFactory
             .getLogger(nz.ac.auckland.Anime.services.UserResource.class);
 
+    @PUT
+    @Path ("{id}")
+    @Consumes({"application/xml","application/json"})
+    public Response editAnime(AnimeDTO is, @PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        //getting the post request
+        Anime newAnime = AnimeMapper.toDomainModel(is);
+
+        //finding the associated anime
+        Anime anime = em.find(Anime.class, new Long(id));
+
+        anime.setEpisodes(newAnime.getEpisodes());
+        anime.setSequels(newAnime.getSequels());
+        anime.setSynopsis(newAnime.getSynopsis());
+        anime.setTitle(newAnime.getTitle());
+        anime.setYear(newAnime.getYear());
+
+        em.persist(anime);
+        em.getTransaction().commit();
+        em.close();
+
+        return Response.created(URI.create("/Anime/" + anime.getId())).build();
+    }
+
     @POST
     @Consumes({"application/xml", "application/json"})
     public Response createAnime(AnimeDTO is) {

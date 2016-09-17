@@ -19,6 +19,34 @@ public class UserResource {
 	private static Logger _logger = LoggerFactory
 			.getLogger(UserResource.class);
 
+
+	@PUT
+	@Path ("{id}")
+	@Consumes({"application/xml","application/json"})
+	public Response editUser(UserDTO is, @PathParam("id") int id) {
+
+		PersistenceManager p = PersistenceManager.instance();
+		EntityManager em = p.createEntityManager();
+		em.getTransaction().begin();
+
+		//getting the post request
+		User newUser = UserMapper.toDomainModel(is);
+
+		//finding the associated user
+		User user = em.find(User.class, new Long(id));
+
+		user.setFirstname(newUser.getFirstname());
+		user.setFollowers(newUser.getFollowers());
+		user.setLastname(newUser.getLastname());
+		user.setUsername(newUser.getUsername());
+
+		em.persist(user);
+		em.getTransaction().commit();
+		em.close();
+
+		return Response.created(URI.create("/User/" + user.getId())).build();
+	}
+
 	@POST
 	@Consumes({"application/xml","application/json"})
 	public Response createUser(UserDTO is) {
@@ -83,5 +111,7 @@ public class UserResource {
 
 		return allUserDTO;
 	}
+
+
 
 }

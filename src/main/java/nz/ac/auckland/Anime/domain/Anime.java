@@ -75,4 +75,24 @@ public class Anime {
     public Set<Anime> getSequels() {
         return sequels;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setEpisodes(int episodes) {
+        this.episodes = episodes;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public void setSequels(Set<Anime> sequels) {
+        this.sequels = sequels;
+    }
 }

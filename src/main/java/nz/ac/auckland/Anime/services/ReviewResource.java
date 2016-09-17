@@ -26,6 +26,32 @@ public class ReviewResource {
     private static Logger _logger = LoggerFactory
             .getLogger(ReviewResource.class);
 
+    @PUT
+    @Path ("{id}")
+    @Consumes({"application/xml","application/json"})
+    public Response editReview(ReviewDTO is, @PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        //getting the post request
+        Review newReview = ReviewMapper.toDomainModel(is);
+
+        //finding the associated review
+        Review review = em.find(Review.class, new Long(id));
+
+        review.setReview(newReview.getReview());
+        review.setShow(newReview.getShow());
+        review.setUser(newReview.getUser());
+
+        em.persist(review);
+        em.getTransaction().commit();
+        em.close();
+
+        return Response.created(URI.create("/Review/" + review.getId())).build();
+    }
+
     @POST
     @Consumes({"application/xml","application/json"})
     public Response createReview(ReviewDTO is) {
