@@ -21,6 +21,10 @@ public class ReviewDTO {
 
     public ReviewDTO(){};
 
+    public ReviewDTO(Long _id) {
+        this._id = _id;
+    }
+
     public ReviewDTO(AnimeDTO show, UserDTO user, String review) {
         this.show = show;
         this.reviewer = user;

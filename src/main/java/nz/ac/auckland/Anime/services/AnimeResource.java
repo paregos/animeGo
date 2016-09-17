@@ -9,9 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ben on 9/16/2016.
@@ -55,6 +60,28 @@ public class AnimeResource {
         em.close();
 
         return anime;
+    }
+
+    @GET
+    @Produces({"application/xml", "application/json"})
+    public List<AnimeDTO> getAllAnime() {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Query query = em.createQuery("select a from Anime a");
+
+        List<Anime> allAnime = query.getResultList();
+        List<AnimeDTO> allAnimeDTO = new ArrayList<AnimeDTO>();
+
+        for(Anime b : allAnime){
+            allAnimeDTO.add(AnimeMapper.toDto(b));
+        }
+
+        em.close();
+
+        return allAnimeDTO;
     }
 
 

@@ -2,6 +2,7 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.Anime;
 import nz.ac.auckland.Anime.domain.Rating;
+import nz.ac.auckland.Anime.domain.Review;
 import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.AnimeDTO;
 import nz.ac.auckland.Anime.dto.RatingDTO;
@@ -28,9 +29,11 @@ public class RatingMapper {
 
     static RatingDTO toDto(Rating rating) {
 
+
+
         Anime show = rating.getShow();
         User reviewer = rating.getUser();
-
+//        RatingDTO in = new RatingDTO(rating.getId(), rating.getScore());
         RatingDTO in = new RatingDTO(rating.getId(), AnimeMapper.toDto(show), UserMapper.toDto(reviewer), rating.getReview(), rating.getScore());
 
         return in;

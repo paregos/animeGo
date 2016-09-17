@@ -2,14 +2,20 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.PersistenceManager;
 import nz.ac.auckland.Anime.domain.Rating;
+import nz.ac.auckland.Anime.domain.Review;
+import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.RatingDTO;
+import nz.ac.auckland.Anime.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ben on 9/16/2016.
@@ -46,11 +52,33 @@ public class RatingResource {
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
-        Rating temp = em.find(Rating.class, new Long(id));
-        RatingDTO rating = RatingMapper.toDto(temp);
+        Rating child = em.find(Rating.class, new Long(id));
+        RatingDTO rating = RatingMapper.toDto(child);
         em.close();
 
         return rating;
+    }
+
+    @GET
+    @Produces({"application/xml", "application/json"})
+    public List<RatingDTO> getAllRating() {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Query query = em.createQuery("select a from Rating a");
+
+        List<Rating> allRating = query.getResultList();
+        List<RatingDTO> allRatingDTO = new ArrayList<RatingDTO>();
+
+        for(Rating b : allRating){
+            allRatingDTO.add(RatingMapper.toDto(b));
+        }
+
+        em.close();
+
+        return allRatingDTO;
     }
 
 }

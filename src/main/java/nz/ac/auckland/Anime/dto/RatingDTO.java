@@ -16,6 +16,11 @@ public class RatingDTO extends ReviewDTO{
     public RatingDTO() {
     }
 
+    public RatingDTO(Long _id, int score) {
+        super(_id);
+        this.score = score;
+    }
+
     public RatingDTO(Long _id, AnimeDTO show, UserDTO reviewer, String review, int score) {
         super(_id, show, reviewer, review);
         this.score = score;

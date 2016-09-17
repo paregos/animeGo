@@ -6,9 +6,12 @@ import nz.ac.auckland.Anime.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/User")
 public class UserResource {
@@ -57,6 +60,28 @@ public class UserResource {
 		_logger.info(temp.getLastname() + "");
 
 		return user;
+	}
+
+	@GET
+	@Produces({"application/xml", "application/json"})
+	public List<UserDTO> getAllUser() {
+
+		PersistenceManager p = PersistenceManager.instance();
+		EntityManager em = p.createEntityManager();
+		em.getTransaction().begin();
+
+		Query query = em.createQuery("select a from User a");
+
+		List<User> allUser = query.getResultList();
+		List<UserDTO> allUserDTO = new ArrayList<UserDTO>();
+
+		for(User b : allUser){
+			allUserDTO.add(UserMapper.toDto(b));
+		}
+
+		em.close();
+
+		return allUserDTO;
 	}
 
 }
