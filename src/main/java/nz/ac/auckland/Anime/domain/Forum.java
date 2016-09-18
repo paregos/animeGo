@@ -17,7 +17,7 @@ public class Forum {
     private Long _id;
 
     @ManyToMany
-    @JoinTable(name="Moderators", joinColumns=@JoinColumn(name="ForumID"),
+    @JoinTable(name="moderators", joinColumns=@JoinColumn(name="forumID"),
             inverseJoinColumns = @JoinColumn(name="userID"))
     private List<User> moderators;
 

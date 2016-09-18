@@ -12,12 +12,12 @@ public class ForumDTO {
 
     private Long _id;
 
-    @XmlElementWrapper(name="Morderators")
-    @XmlElement(name="MorderatorID")
+    @XmlElementWrapper(name="morderators")
+    @XmlElement(name="morderatorID")
     private List<Long> moderators;
 
-    @XmlElementWrapper(name="Comments")
-    @XmlElement(name="Comment")
+    @XmlElementWrapper(name="comments")
+    @XmlElement(name="comment")
     private List<CommentDTO> comments;
 
     private Long animeTopicID;

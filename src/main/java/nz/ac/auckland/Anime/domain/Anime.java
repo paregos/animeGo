@@ -22,8 +22,8 @@ public class Anime {
     private String synopsis;
 
     @ManyToMany
-    @JoinTable(name="AnimeSequels", joinColumns=@JoinColumn(name="PrequelId"),
-            inverseJoinColumns = @JoinColumn(name="SequelId"))
+    @JoinTable(name="animeSequels", joinColumns=@JoinColumn(name="prequelId"),
+            inverseJoinColumns = @JoinColumn(name="sequelId"))
     private Set<Anime> sequels;
 
     public Anime() {}

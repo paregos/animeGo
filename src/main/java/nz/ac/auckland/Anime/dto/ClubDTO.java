@@ -12,11 +12,11 @@ public class ClubDTO {
 
     private Long _id;
 
-    @XmlElementWrapper(name="Members")
+    @XmlElementWrapper(name="members")
     @XmlElement(name="member")
     private Set<Long> members;
 
-    @XmlElementWrapper(name="Forums")
+    @XmlElementWrapper(name="forums")
     @XmlElement(name="forum")
     private Set<ForumDTO> forums;
 

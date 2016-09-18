@@ -17,7 +17,7 @@ public class User {
 	private String firstname;
 
 	@ManyToMany
-	@JoinTable(name="Following", joinColumns=@JoinColumn(name="userFollowing"),
+	@JoinTable(name="following", joinColumns=@JoinColumn(name="userFollowing"),
 			inverseJoinColumns = @JoinColumn(name="userFollowed"))
     private Set<User> followers;
 	
