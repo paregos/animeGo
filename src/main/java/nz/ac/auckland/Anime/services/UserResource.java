@@ -44,7 +44,7 @@ public class UserResource {
 		em.getTransaction().commit();
 		em.close();
 
-		return Response.created(URI.create("/User/" + user.getId())).build();
+		return Response.noContent().build();
 	}
 
 	@POST

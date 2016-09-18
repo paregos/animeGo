@@ -9,26 +9,26 @@ import javax.persistence.*;
 
 public class Rating extends Review{
 
-    private int score;
+    private Long score;
 
     public Rating() {
     }
 
-    public Rating(Anime show, User user, String review, int score) {
+    public Rating(Anime show, User user, String review, Long score) {
         super(show, user, review);
         this.score = score;
     }
 
-    public Rating(Long _id, Anime show, User user, String review, int score) {
+    public Rating(Long _id, Anime show, User user, String review, Long score) {
         super(_id, show, user, review);
         this.score = score;
     }
 
-    public int getScore() {
+    public Long getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Long score) {
         this.score = score;
     }
 }

@@ -2,9 +2,7 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.Anime;
 import nz.ac.auckland.Anime.domain.PersistenceManager;
-import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.AnimeDTO;
-import nz.ac.auckland.Anime.dto.UserDTO;
 
 import javax.persistence.EntityManager;
 import java.util.HashSet;
@@ -19,14 +17,17 @@ public class AnimeMapper {
 
         Set<Anime> sequels = new HashSet<Anime>();
 
-        for(Long i : in.getSequelIds()){
-            PersistenceManager p = PersistenceManager.instance();
-            EntityManager em = p.createEntityManager();
-            em.getTransaction().begin();
-            Anime temp = em.find(Anime.class, i);
-            System.out.println(temp.getId());
-            sequels.add(temp);
-            em.close();
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+
+        if(in.getSequelIds() != null) {
+            for (Long i : in.getSequelIds()) {
+                em = p.createEntityManager();
+                em.getTransaction().begin();
+                Anime sequel = i == null ? null : em.find(Anime.class, i);
+                sequels.add(sequel);
+                em.close();
+            }
         }
 
         Anime anime = new Anime(in.getId(), in.getTitle(), in.getEpisodes(), in.getYear(), in.getSynopsis(), sequels);
@@ -38,8 +39,11 @@ public class AnimeMapper {
 
         Set<Long> sequelIds = new HashSet<Long>();
 
-        for(Anime i : anime.getSequels()){
-            sequelIds.add(i.getId());
+        if(anime.getSequels() != null) {
+            for (Anime i : anime.getSequels()) {
+                Long temp = i == null ? null : i.getId();
+                sequelIds.add(temp);
+            }
         }
 
         AnimeDTO in = new AnimeDTO(anime.getId(), anime.getTitle(), anime.getEpisodes(), anime.getYear(), anime.getSynopsis(), sequelIds);

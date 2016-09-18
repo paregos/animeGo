@@ -49,7 +49,7 @@ public class ReviewResource {
         em.getTransaction().commit();
         em.close();
 
-        return Response.created(URI.create("/Review/" + review.getId())).build();
+        return Response.noContent().build();
     }
 
     @POST

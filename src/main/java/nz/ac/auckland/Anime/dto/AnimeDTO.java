@@ -13,9 +13,9 @@ public class AnimeDTO {
 
     private String title;
 
-    private int episodes;
+    private Long episodes;
 
-    private int year;
+    private Long year;
 
     private String synopsis;
 
@@ -25,14 +25,14 @@ public class AnimeDTO {
 
     public AnimeDTO() {}
 
-    public AnimeDTO(String title, int episodes, int year, String synopsis) {
+    public AnimeDTO(String title, Long episodes, Long year, String synopsis) {
         this.title = title;
         this.episodes = episodes;
         this.year = year;
         this.synopsis = synopsis;
     }
 
-    public AnimeDTO(String title, int episodes, int year, String synopsis, Set<Long> sequels) {
+    public AnimeDTO(String title, Long episodes, Long year, String synopsis, Set<Long> sequels) {
         this.title = title;
         this.episodes = episodes;
         this.year = year;
@@ -40,7 +40,7 @@ public class AnimeDTO {
         this.sequelIds = sequels;
     }
 
-    public AnimeDTO(Long _id, String title, int episodes, int year, String synopsis, Set<Long> sequelIds) {
+    public AnimeDTO(Long _id, String title, Long episodes, Long year, String synopsis, Set<Long> sequelIds) {
         this._id = _id;
         this.title = title;
         this.episodes = episodes;
@@ -57,11 +57,11 @@ public class AnimeDTO {
         return title;
     }
 
-    public int getEpisodes() {
+    public Long getEpisodes() {
         return episodes;
     }
 
-    public int getYear() {
+    public Long getYear() {
         return year;
     }
 

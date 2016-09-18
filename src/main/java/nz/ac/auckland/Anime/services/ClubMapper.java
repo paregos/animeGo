@@ -26,18 +26,26 @@ public class ClubMapper {
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
-        //get moderators
-        for(Long i : in.getMembers()){
-            em.getTransaction().begin();
-            User temp = em.find(User.class, i);
-            members.add(temp);
-            em.close();
+
+        //get members
+        if(in.getMembers() != null) {
+            for (Long i : in.getMembers()) {
+                em = p.createEntityManager();
+                em.getTransaction().begin();
+                User temp = i == null ? null : em.find(User.class, i);
+                members.add(temp);
+                em.close();
+            }
         }
 
-        //get comments
-        for(ForumDTO i : in.getForums()){
-            forums.add(ForumMapper.toDomainModel(i));
+        //get forums
+        if(in.getForums() != null) {
+            for (ForumDTO i : in.getForums()) {
+                Forum temp = i == null ? null : ForumMapper.toDomainModel(i);
+                forums.add(temp);
+            }
         }
+
 
         Club club = new Club(in.getId(), members, forums, in.getName());
 
@@ -50,13 +58,17 @@ public class ClubMapper {
         Set<ForumDTO> forums = new HashSet<ForumDTO>();
 
         //get memebers
-        for(User i : forum.getMembers()){
-            members.add(i.getId());
+        if(forum.getMembers() != null) {
+            for (User i : forum.getMembers()) {
+                members.add(i.getId());
+            }
         }
 
         //get forums
-        for(Forum i : forum.getForums()){
-            forums.add(ForumMapper.toDto(i));
+        if(forum.getForums() != null) {
+            for (Forum i : forum.getForums()) {
+                forums.add(ForumMapper.toDto(i));
+            }
         }
 
         ClubDTO in = new ClubDTO(forum.getId(), members, forums, forum.getName());

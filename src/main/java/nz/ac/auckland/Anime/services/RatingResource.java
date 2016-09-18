@@ -2,9 +2,7 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.PersistenceManager;
 import nz.ac.auckland.Anime.domain.Rating;
-import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.RatingDTO;
-import nz.ac.auckland.Anime.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +49,7 @@ public class RatingResource {
         em.getTransaction().commit();
         em.close();
 
-        return Response.created(URI.create("/Rating/" + rating.getId())).build();
+        return Response.noContent().build();
     }
 
     @POST

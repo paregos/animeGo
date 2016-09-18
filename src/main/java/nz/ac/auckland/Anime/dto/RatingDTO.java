@@ -11,22 +11,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RatingDTO extends ReviewDTO{
 
-    private int score;
+    private Long score;
 
     public RatingDTO() {
     }
 
-    public RatingDTO(Long _id, int score) {
+    public RatingDTO(Long _id, Long score) {
         super(_id);
         this.score = score;
     }
 
-    public RatingDTO(Long _id, Long show, Long reviewer, String review, int score) {
+    public RatingDTO(Long _id, Long show, Long reviewer, String review, Long score) {
         super(_id, show, reviewer, review);
         this.score = score;
     }
 
-    public int getScore() {
+    public Long getScore() {
         return score;
     }
 }

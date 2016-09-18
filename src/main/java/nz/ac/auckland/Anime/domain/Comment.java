@@ -14,12 +14,12 @@ public class Comment {
 
     private String comment;
 
-    private int date;
+    private Long date;
 
     public Comment() {
     }
 
-    public Comment(User commenter, String comment, int date) {
+    public Comment(User commenter, String comment, Long date) {
         this.commenter = commenter;
         this.comment = comment;
         this.date = date;
@@ -41,11 +41,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public int getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 }

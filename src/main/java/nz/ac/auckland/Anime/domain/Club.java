@@ -16,7 +16,7 @@ public class Club {
     @ManyToMany
     private Set<User> members;
 
-    @OneToMany
+    @ManyToMany
     private Set<Forum> forums;
 
     private String name;

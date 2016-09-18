@@ -51,7 +51,7 @@ public class AnimeApplication extends Application {
       em.persist(user);
 
       //Creating a anime dummy obj
-      Anime anime = new Anime("umaruChan", 12, 2016, "Jun Xu");
+      Anime anime = new Anime("umaruChan", new Long(12), new Long(2016), "Jun Xu");
       em.persist(anime);
 
       //Creating a review dummy obj
@@ -59,11 +59,11 @@ public class AnimeApplication extends Application {
       em.persist(review);
 
       //Creating a rating dummy obj
-      Rating rating = new Rating(anime, user, "uo", 5);
+      Rating rating = new Rating(anime, user, "uo", new Long(5));
       em.persist(rating);
 
       //Creating a forum dummy obj
-      Comment comment = new Comment(user, "this is a comment", 1900);
+      Comment comment = new Comment(user, "this is a comment", new Long(1900));
       List<User> moderators = new ArrayList<User>();
       moderators.add(user);
       List<Comment> comments = new ArrayList<Comment>();

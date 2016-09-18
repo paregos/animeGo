@@ -27,7 +27,7 @@ public class ForumMapper {
             for (Long i : in.getModerators()) {
                 em = p.createEntityManager();
                 em.getTransaction().begin();
-                User reviewer = i == 0 ? null : em.find(User.class, i);
+                User reviewer = i == null ? null : em.find(User.class, i);
                 User temp = em.find(User.class, i);
                 moderators.add(temp);
                 em.close();

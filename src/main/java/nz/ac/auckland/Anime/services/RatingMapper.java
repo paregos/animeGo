@@ -4,9 +4,7 @@ import nz.ac.auckland.Anime.domain.Anime;
 import nz.ac.auckland.Anime.domain.PersistenceManager;
 import nz.ac.auckland.Anime.domain.Rating;
 import nz.ac.auckland.Anime.domain.User;
-import nz.ac.auckland.Anime.dto.AnimeDTO;
 import nz.ac.auckland.Anime.dto.RatingDTO;
-import nz.ac.auckland.Anime.dto.UserDTO;
 
 import javax.persistence.EntityManager;
 
@@ -29,10 +27,7 @@ public class RatingMapper {
         Anime show = in.getShowID() == null ? null : em.find(Anime.class, in.getShowID());
         em.close();
 
-        String reviewString = in.getReview() == null ? null : in.getReview().equals("") ? null : in.getReview();
-
-
-        Rating rating = new Rating(in.getId(), show, reviewer, reviewString, in.getScore());
+        Rating rating = new Rating(in.getId(), show, reviewer, in.getReview(), in.getScore());
 
         return rating;
     }

@@ -15,12 +15,12 @@ public class CommentDTO {
 
     private String comment;
 
-    private int date;
+    private Long date;
 
     public CommentDTO() {
     }
 
-    public CommentDTO(Long commenter, String comment, int date) {
+    public CommentDTO(Long commenter, String comment, Long date) {
         this.commenterID = commenter;
         this.comment = comment;
         this.date = date;
@@ -42,11 +42,11 @@ public class CommentDTO {
         this.comment = comment;
     }
 
-    public int getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 }

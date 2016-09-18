@@ -2,9 +2,7 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.Anime;
 import nz.ac.auckland.Anime.domain.PersistenceManager;
-import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.AnimeDTO;
-import nz.ac.auckland.Anime.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Ben on 9/16/2016.
@@ -53,7 +49,7 @@ public class AnimeResource {
         em.getTransaction().commit();
         em.close();
 
-        return Response.created(URI.create("/Anime/" + anime.getId())).build();
+        return Response.noContent().build();
     }
 
     @POST

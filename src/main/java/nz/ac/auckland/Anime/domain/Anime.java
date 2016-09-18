@@ -15,9 +15,9 @@ public class Anime {
 
     private String title;
 
-    private int episodes;
+    private Long episodes;
 
-    private int year;
+    private Long year;
 
     private String synopsis;
 
@@ -28,14 +28,14 @@ public class Anime {
 
     public Anime() {}
 
-    public Anime(String title, int episodes, int year, String synopsis) {
+    public Anime(String title, Long episodes, Long year, String synopsis) {
         this.title = title;
         this.episodes = episodes;
         this.year = year;
         this.synopsis = synopsis;
     }
 
-    public Anime(String title, int episodes, int year, String synopsis, Set<Anime> sequels) {
+    public Anime(String title, Long episodes, Long year, String synopsis, Set<Anime> sequels) {
         this.title = title;
         this.episodes = episodes;
         this.year = year;
@@ -43,7 +43,7 @@ public class Anime {
         this.sequels = sequels;
     }
 
-    public Anime(Long _id, String title, int episodes, int year, String synopsis, Set<Anime> sequels) {
+    public Anime(Long _id, String title, Long episodes, Long year, String synopsis, Set<Anime> sequels) {
         this._id = _id;
         this.title = title;
         this.episodes = episodes;
@@ -60,11 +60,11 @@ public class Anime {
         return title;
     }
 
-    public int getEpisodes() {
+    public Long getEpisodes() {
         return episodes;
     }
 
-    public int getYear() {
+    public Long getYear() {
         return year;
     }
 
@@ -80,11 +80,11 @@ public class Anime {
         this.title = title;
     }
 
-    public void setEpisodes(int episodes) {
+    public void setEpisodes(Long episodes) {
         this.episodes = episodes;
     }
 
-    public void setYear(int year) {
+    public void setYear(Long year) {
         this.year = year;
     }
 
