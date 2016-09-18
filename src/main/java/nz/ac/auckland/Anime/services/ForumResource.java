@@ -24,6 +24,38 @@ public class ForumResource {
     private static Logger _logger = LoggerFactory
             .getLogger(nz.ac.auckland.Anime.services.UserResource.class);
 
+    @PUT
+    @Path ("{id}")
+    @Consumes({"application/xml","application/json"})
+    public Response editForum(ForumDTO is, @PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        //getting the post request
+        Forum newForum = ForumMapper.toDomainModel(is);
+
+        //finding the associated forum
+        Forum forum = em.find(Forum.class, new Long(id));
+
+        if(newForum.getModerators() != null ){
+            forum.setModerators(newForum.getModerators());
+        }
+        if(newForum.getComments() != null ){
+            forum.setComments(newForum.getComments());
+        }
+        if(newForum.getAnimeTopic() != null ){
+            forum.setAnimeTopic(newForum.getAnimeTopic());
+        }
+
+        em.persist(forum);
+        em.getTransaction().commit();
+        em.close();
+
+        return Response.noContent().build();
+    }
+
     @POST
     @Consumes({"application/xml","application/json"})
     public Response createForum(ForumDTO is) {
@@ -59,7 +91,7 @@ public class ForumResource {
 
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<ForumDTO> getAllRating() {
+    public List<ForumDTO> getAllForum() {
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();

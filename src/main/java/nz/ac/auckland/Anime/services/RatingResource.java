@@ -40,10 +40,18 @@ public class RatingResource {
         //finding the associated rating
         Rating rating = em.find(Rating.class, new Long(id));
 
-        rating.setReview(newRating.getReview());
-        rating.setShow(newRating.getShow());
-        rating.setUser(newRating.getUser());
-        rating.setScore(newRating.getScore());
+        if(newRating.getReview() != null ){
+            rating.setReview(newRating.getReview());
+        }
+        if(newRating.getShow() != null ){
+            rating.setShow(newRating.getShow());
+        }
+        if(newRating.getUser() != null ){
+            rating.setUser(newRating.getUser());
+        }
+        if(newRating.getScore() != null ){
+            rating.setScore(newRating.getScore());
+        }
 
         em.persist(rating);
         em.getTransaction().commit();

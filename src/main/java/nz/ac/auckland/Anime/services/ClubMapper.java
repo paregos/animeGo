@@ -9,6 +9,7 @@ import nz.ac.auckland.Anime.dto.ForumDTO;
 import nz.ac.auckland.Anime.dto.UserDTO;
 
 import javax.persistence.EntityManager;
+import javax.ws.rs.core.Response;
 import java.util.HashSet;
 import java.util.Set;
 

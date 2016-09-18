@@ -39,11 +39,21 @@ public class AnimeResource {
         //finding the associated anime
         Anime anime = em.find(Anime.class, new Long(id));
 
-        anime.setEpisodes(newAnime.getEpisodes());
-        anime.setSequels(newAnime.getSequels());
-        anime.setSynopsis(newAnime.getSynopsis());
-        anime.setTitle(newAnime.getTitle());
-        anime.setYear(newAnime.getYear());
+        if(newAnime.getEpisodes() != null){
+            anime.setEpisodes(newAnime.getEpisodes());
+        }
+        if(newAnime.getSequels() != null){
+            anime.setSequels(newAnime.getSequels());
+        }
+        if(newAnime.getSynopsis() != null){
+            anime.setSynopsis(newAnime.getSynopsis());
+        }
+        if(newAnime.getTitle() != null){
+            anime.setTitle(newAnime.getTitle());
+        }
+        if(newAnime.getYear() != null){
+            anime.setYear(newAnime.getYear());
+        }
 
         em.persist(anime);
         em.getTransaction().commit();

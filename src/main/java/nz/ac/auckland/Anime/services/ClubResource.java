@@ -24,6 +24,39 @@ public class ClubResource {
     private static Logger _logger = LoggerFactory
             .getLogger(nz.ac.auckland.Anime.services.UserResource.class);
 
+
+    @PUT
+    @Path ("{id}")
+    @Consumes({"application/xml","application/json"})
+    public Response editClub(ClubDTO is, @PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        //getting the post request
+        Club newClub = ClubMapper.toDomainModel(is);
+
+        //finding the associated club
+        Club club = em.find(Club.class, new Long(id));
+
+        if(newClub.getMembers() != null ){
+            club.setMembers(newClub.getMembers());
+        }
+        if(newClub.getForums() != null ){
+            club.setForums(newClub.getForums());
+        }
+        if(newClub.getName() != null ){
+            club.setName(newClub.getName());
+        }
+
+        em.persist(club);
+        em.getTransaction().commit();
+        em.close();
+
+        return Response.noContent().build();
+    }
+
     @POST
     @Consumes({"application/xml","application/json"})
     public Response createClub(ClubDTO is) {

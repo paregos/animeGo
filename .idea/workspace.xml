@@ -2,36 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3bd6d1f-0607-4ec6-aae6-48ecfe15bf26" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Anime.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Anime.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Club.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Club.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Comment.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Comment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Rating.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/domain/Rating.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/dto/AnimeDTO.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/dto/AnimeDTO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/dto/CommentDTO.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/dto/CommentDTO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/dto/RatingDTO.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/dto/RatingDTO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/AnimeApplication.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/AnimeApplication.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/AnimeMapper.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/AnimeMapper.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/AnimeResource.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/AnimeResource.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ClubMapper.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ClubMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ForumMapper.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ForumMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/RatingMapper.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/RatingMapper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ClubResource.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ClubResource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/CommentMapper.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/CommentMapper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ForumResource.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ForumResource.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/RatingResource.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/RatingResource.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ReviewResource.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/ReviewResource.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/UserResource.class" afterPath="$PROJECT_DIR$/target/classes/nz/ac/auckland/Anime/services/UserResource.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Anime.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Anime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Club.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Club.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Comment.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Comment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Rating.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Rating.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/AnimeDTO.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/AnimeDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/CommentDTO.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/CommentDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/RatingDTO.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/RatingDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeApplication.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeMapper.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeMapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeResource.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeResource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumMapper.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingMapper.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubResource.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumResource.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumResource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingResource.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingResource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewResource.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewResource.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserResource.java" afterPath="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserResource.java" />
@@ -55,11 +38,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AnimeApplication.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AnimeApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-253">
-              <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+            <state relative-caret-position="108">
+              <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClubMapper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -91,30 +84,30 @@
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Topic.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Forum.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/CommentMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/CommentDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ClubDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ReviewDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/RatingDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/UserDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ForumDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingResource.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Club.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Comment.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Anime.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Rating.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/CommentMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubResource.java" />
       </list>
     </option>
   </component>
@@ -650,7 +643,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -658,7 +651,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122023806" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33696836" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33696836" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -837,29 +830,11 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/CommentResource.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/TopicDTO.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Topic.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/CommentMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="19" column="57" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/RatingDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/CommentDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -882,27 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2240#2250#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ForumDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -910,42 +864,6 @@
           <folding>
             <element signature="e#418#424#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-          <folding>
-            <element signature="e#3047#3058#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ClubDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -962,43 +880,6 @@
         <state relative-caret-position="493">
           <caret line="43" column="72" selection-start-line="43" selection-start-column="62" selection-end-line="43" selection-end-column="72" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Club.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Comment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Forum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="45" column="21" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="21" />
-          <folding>
-            <element signature="e#1084#1085#0" expanded="true" />
-            <element signature="e#1110#1111#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1034,37 +915,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
-          <folding>
-            <element signature="e#3010#3021#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1092,10 +947,148 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/UserResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="50" column="52" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/RatingResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="60" column="5" selection-start-line="27" selection-start-column="4" selection-end-line="60" selection-end-column="5" />
+          <folding>
+            <element signature="e#3237#3248#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ReviewResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="24" />
+          <folding>
+            <element signature="e#3215#3226#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Forum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="38" column="83" selection-start-line="38" selection-start-column="83" selection-end-line="38" selection-end-column="83" />
+          <folding>
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1110#1111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ForumDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="56" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3215#3225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Comment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/CommentDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ForumMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/CommentMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/dto/ClubDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="37" column="33" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/domain/Club.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/AnimeApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        <state relative-caret-position="108">
+          <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nz/ac/auckland/Anime/services/ClubMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
           <folding />
         </state>
       </provider>

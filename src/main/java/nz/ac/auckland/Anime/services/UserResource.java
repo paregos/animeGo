@@ -35,10 +35,22 @@ public class UserResource {
 		//finding the associated user
 		User user = em.find(User.class, new Long(id));
 
-		user.setFirstname(newUser.getFirstname());
-		user.setFollowers(newUser.getFollowers());
-		user.setLastname(newUser.getLastname());
-		user.setUsername(newUser.getUsername());
+		if(newUser.getFirstname() != null){
+			user.setFirstname(newUser.getFirstname());
+		}
+
+		if(newUser.getFollowers() != null){
+			user.setFollowers(newUser.getFollowers());
+		}
+
+		if(newUser.getLastname() != null){
+			user.setLastname(newUser.getLastname());
+		}
+
+		if(newUser.getUsername() != null){
+			user.setUsername(newUser.getUsername());
+		}
+
 
 		em.persist(user);
 		em.getTransaction().commit();

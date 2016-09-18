@@ -41,9 +41,15 @@ public class ReviewResource {
         //finding the associated review
         Review review = em.find(Review.class, new Long(id));
 
-        review.setReview(newReview.getReview());
-        review.setShow(newReview.getShow());
-        review.setUser(newReview.getUser());
+        if(newReview.getReview() != null){
+            review.setReview(newReview.getReview());
+        }
+        if(newReview.getShow() != null){
+            review.setShow(newReview.getShow());
+        }
+        if(newReview.getUser() != null) {
+            review.setUser(newReview.getUser());
+        }
 
         em.persist(review);
         em.getTransaction().commit();
