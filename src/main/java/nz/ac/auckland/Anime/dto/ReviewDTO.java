@@ -13,9 +13,9 @@ public class ReviewDTO {
 
     private Long _id;
 
-    private AnimeDTO show;
+    private Long showID;
 
-    private UserDTO reviewer;
+    private Long reviewerID;
 
     private String review;
 
@@ -25,16 +25,16 @@ public class ReviewDTO {
         this._id = _id;
     }
 
-    public ReviewDTO(AnimeDTO show, UserDTO user, String review) {
-        this.show = show;
-        this.reviewer = user;
+    public ReviewDTO(Long show, Long user, String review) {
+        this.showID = show;
+        this.reviewerID = user;
         this.review = review;
     }
 
-    public ReviewDTO(Long _id, AnimeDTO show, UserDTO reviewer, String review) {
+    public ReviewDTO(Long _id, Long show, Long reviewer, String review) {
         this._id = _id;
-        this.show = show;
-        this.reviewer = reviewer;
+        this.showID = show;
+        this.reviewerID = reviewer;
         this.review = review;
     }
 
@@ -42,12 +42,24 @@ public class ReviewDTO {
         return _id;
     }
 
-    public AnimeDTO getShow() {
-        return show;
+    public Long getShowID() {
+        return showID;
     }
 
-    public UserDTO getReviewer() {
-        return reviewer;
+    public Long getReviewerID() {
+        return reviewerID;
+    }
+
+    public void setShowID(Long showID) {
+        this.showID = showID;
+    }
+
+    public void setReviewerID(Long reviewerID) {
+        this.reviewerID = reviewerID;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 
     public String getReview() {

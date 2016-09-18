@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CommentDTO {
 
-    private UserDTO commenter;
+    private Long commenterID;
 
     private String comment;
 
@@ -20,18 +20,18 @@ public class CommentDTO {
     public CommentDTO() {
     }
 
-    public CommentDTO(UserDTO commenter, String comment, int date) {
-        this.commenter = commenter;
+    public CommentDTO(Long commenter, String comment, int date) {
+        this.commenterID = commenter;
         this.comment = comment;
         this.date = date;
     }
 
-    public UserDTO getCommenter() {
-        return commenter;
+    public Long getCommenterID() {
+        return commenterID;
     }
 
-    public void setCommenter(UserDTO commenter) {
-        this.commenter = commenter;
+    public void setCommenterID(Long commenterID) {
+        this.commenterID = commenterID;
     }
 
     public String getComment() {

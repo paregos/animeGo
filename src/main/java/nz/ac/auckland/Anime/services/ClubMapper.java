@@ -2,11 +2,13 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.Club;
 import nz.ac.auckland.Anime.domain.Forum;
+import nz.ac.auckland.Anime.domain.PersistenceManager;
 import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.ClubDTO;
 import nz.ac.auckland.Anime.dto.ForumDTO;
 import nz.ac.auckland.Anime.dto.UserDTO;
 
+import javax.persistence.EntityManager;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +23,15 @@ public class ClubMapper {
         Set<User> members = new HashSet<User>();
         Set<Forum> forums = new HashSet<Forum>();
 
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
         //get moderators
-        for(UserDTO i : in.getMembers()){
-            members.add(UserMapper.toDomainModel(i));
+        for(Long i : in.getMembers()){
+            em.getTransaction().begin();
+            User temp = em.find(User.class, i);
+            members.add(temp);
+            em.close();
         }
 
         //get comments
@@ -31,19 +39,19 @@ public class ClubMapper {
             forums.add(ForumMapper.toDomainModel(i));
         }
 
-        Club forum = new Club(in.getId(), members, forums);
+        Club club = new Club(in.getId(), members, forums, in.getName());
 
-        return forum;
+        return club;
     }
 
     static ClubDTO toDto(Club forum) {
 
-        Set<UserDTO> members = new HashSet<UserDTO>();
+        Set<Long> members = new HashSet<Long>();
         Set<ForumDTO> forums = new HashSet<ForumDTO>();
 
         //get memebers
         for(User i : forum.getMembers()){
-            members.add(UserMapper.toDto(i));
+            members.add(i.getId());
         }
 
         //get forums
@@ -51,7 +59,7 @@ public class ClubMapper {
             forums.add(ForumMapper.toDto(i));
         }
 
-        ClubDTO in = new ClubDTO(forum.getId(), members, forums);
+        ClubDTO in = new ClubDTO(forum.getId(), members, forums, forum.getName());
 
         return in;
 

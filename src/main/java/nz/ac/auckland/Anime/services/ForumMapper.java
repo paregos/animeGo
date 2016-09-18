@@ -1,12 +1,11 @@
 package nz.ac.auckland.Anime.services;
 
-import nz.ac.auckland.Anime.domain.Comment;
-import nz.ac.auckland.Anime.domain.Forum;
-import nz.ac.auckland.Anime.domain.User;
+import nz.ac.auckland.Anime.domain.*;
 import nz.ac.auckland.Anime.dto.CommentDTO;
 import nz.ac.auckland.Anime.dto.ForumDTO;
 import nz.ac.auckland.Anime.dto.UserDTO;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,40 +19,60 @@ public class ForumMapper {
         List<User> moderators = new ArrayList<User>();
         List<Comment> comments = new ArrayList<Comment>();
 
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+
         //get moderators
-        for(UserDTO i : in.getModerators()){
-            System.out.println(i.getId());
-            System.out.println(i.getFirstname());
-            moderators.add(UserMapper.toDomainModel(i));
+        if(in.getModerators() != null) {
+            for (Long i : in.getModerators()) {
+                em = p.createEntityManager();
+                em.getTransaction().begin();
+                User reviewer = i == 0 ? null : em.find(User.class, i);
+                User temp = em.find(User.class, i);
+                moderators.add(temp);
+                em.close();
+            }
         }
 
         //get comments
-        for(CommentDTO i : in.getComments()){
-            System.out.println(i.getComment());
-            comments.add(CommentMapper.toDomainModel(i));
+        if(in.getComments() != null) {
+            for (CommentDTO i : in.getComments()) {
+                comments.add(CommentMapper.toDomainModel(i));
+            }
         }
 
-        Forum forum = new Forum(in.getId(), moderators, comments, AnimeMapper.toDomainModel(in.getAnimeTopic()));
+        em = p.createEntityManager();
+        em.getTransaction().begin();
+        Anime temp = in.getAnimeTopicID() == null ? null : em.find(Anime.class, in.getAnimeTopicID());
+        em.close();
+
+        Forum forum = new Forum(in.getId(), moderators, comments, temp);
 
         return forum;
     }
 
     static ForumDTO toDto(Forum forum) {
 
-        List<UserDTO> moderators = new ArrayList<UserDTO>();
+        List<Long> moderators = new ArrayList<Long>();
         List<CommentDTO> comments = new ArrayList<CommentDTO>();
 
         //get moderators
-        for(User i : forum.getModerators()){
-            moderators.add(UserMapper.toDto(i));
+        if(forum.getModerators() != null) {
+            for (User i : forum.getModerators()) {
+                moderators.add(i.getId());
+            }
         }
 
         //get comments
-        for(Comment i : forum.getComments()){
-            comments.add(CommentMapper.toDto(i));
+        if(forum.getModerators() != null) {
+            for (Comment i : forum.getComments()) {
+                comments.add(CommentMapper.toDto(i));
+            }
         }
 
-        ForumDTO in = new ForumDTO(forum.getId(), moderators, comments, AnimeMapper.toDto(forum.getAnimeTopic()));
+        Long animeTopicId = forum.getAnimeTopic() == null ? null : forum.getAnimeTopic().getId();
+
+        ForumDTO in = new ForumDTO(forum.getId(), moderators, comments, animeTopicId);
 
         return in;
 

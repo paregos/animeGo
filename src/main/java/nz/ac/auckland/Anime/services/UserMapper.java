@@ -21,11 +21,14 @@ public class UserMapper {
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
 
-        for(Long i : in.getFollowIds()){
-            em.getTransaction().begin();
-            User temp = em.find(User.class, i);
-            friends.add(temp);
-            em.close();
+        if(in.getFollowIds() != null) {
+            for (Long i : in.getFollowIds()) {
+                em = p.createEntityManager();
+                em.getTransaction().begin();
+                User temp = em.find(User.class, i);
+                friends.add(temp);
+                em.close();
+            }
         }
 
         User user = new User(in.getId(), in.getUsername(), in.getLastname(), in.getFirstname(), friends);

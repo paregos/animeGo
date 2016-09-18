@@ -19,18 +19,22 @@ public class Club {
     @OneToMany
     private Set<Forum> forums;
 
+    private String name;
+
     public Club() {
     }
 
-    public Club(Set<User> members, Set<Forum> forums) {
+    public Club(Set<User> members, Set<Forum> forums, String name) {
         this.members = members;
         this.forums = forums;
+        this.name = name;
     }
 
-    public Club(Long _id, Set<User> members, Set<Forum> forums) {
+    public Club(Long _id, Set<User> members, Set<Forum> forums, String name) {
         this._id = _id;
         this.members = members;
         this.forums = forums;
+        this.name = name;
     }
 
     public Long getId() {
@@ -51,5 +55,13 @@ public class Club {
 
     public void setForums(Set<Forum> forums) {
         this.forums = forums;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -36,6 +36,7 @@ public class AnimeApplication extends Application {
       singletons.add(new ReviewResource());
       singletons.add(new RatingResource());
       singletons.add(new ForumResource());
+      singletons.add(new ClubResource());
       singletons.add(PersistenceManager.instance());
       setupDummyEntries();
    }
@@ -67,9 +68,16 @@ public class AnimeApplication extends Application {
       moderators.add(user);
       List<Comment> comments = new ArrayList<Comment>();
       comments.add(comment);
-
       Forum forum = new Forum( moderators, comments, anime );
       em.persist(forum);
+
+      //creating a club dummy obj
+      Set<User> members = new HashSet<User>();
+      members.add(user);
+      Set<Forum> forums = new HashSet<Forum>();
+      forums.add(forum);
+      Club club = new Club(members, forums, "The New Game club");
+      em.persist(club);
 
       em.getTransaction().commit();
       em.close();

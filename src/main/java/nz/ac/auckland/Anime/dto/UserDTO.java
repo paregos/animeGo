@@ -17,8 +17,8 @@ public class UserDTO {
 
     private String firstname;
 
-    @XmlElementWrapper(name="followIds")
-    @XmlElement(name="followId")
+    @XmlElementWrapper(name="followingIds")
+    @XmlElement(name="userId")
     private Set<Long> followIds;
     //private Set<User> friends;
 

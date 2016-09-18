@@ -13,40 +13,40 @@ public class ForumDTO {
     private Long _id;
 
     @XmlElementWrapper(name="Morderators")
-    @XmlElement(name="Morderator")
-    private List<UserDTO> moderators;
+    @XmlElement(name="MorderatorID")
+    private List<Long> moderators;
 
     @XmlElementWrapper(name="Comments")
     @XmlElement(name="Comment")
     private List<CommentDTO> comments;
 
-    private AnimeDTO animeTopic;
+    private Long animeTopicID;
 
     public ForumDTO() {
     }
 
-    public ForumDTO(List<UserDTO> moderators, List<CommentDTO> comments, AnimeDTO topic) {
+    public ForumDTO(List<Long> moderators, List<CommentDTO> comments, Long topic) {
         this.moderators = moderators;
         this.comments = comments;
-        this.animeTopic = topic;
+        this.animeTopicID = topic;
     }
 
-    public ForumDTO(Long _id, List<UserDTO> moderators, List<CommentDTO> comments, AnimeDTO topic) {
+    public ForumDTO(Long _id, List<Long> moderators, List<CommentDTO> comments, Long topic) {
         this._id = _id;
         this.moderators = moderators;
         this.comments = comments;
-        this.animeTopic = topic;
+        this.animeTopicID = topic;
     }
 
     public Long getId() {
         return _id;
     }
 
-    public List<UserDTO> getModerators() {
+    public List<Long> getModerators() {
         return moderators;
     }
 
-    public void setModerators(List<UserDTO> moderators) {
+    public void setModerators(List<Long> moderators) {
         this.moderators = moderators;
     }
 
@@ -58,11 +58,11 @@ public class ForumDTO {
         this.comments = comments;
     }
 
-    public AnimeDTO getAnimeTopic() {
-        return animeTopic;
+    public Long getAnimeTopicID() {
+        return animeTopicID;
     }
 
-    public void setAnimeTopic(AnimeDTO animeTopic) {
-        this.animeTopic = animeTopic;
+    public void setAnimeTopicID(Long animeTopicID) {
+        this.animeTopicID = animeTopicID;
     }
 }

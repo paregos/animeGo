@@ -14,35 +14,47 @@ public class ClubDTO {
 
     @XmlElementWrapper(name="Members")
     @XmlElement(name="member")
-    private Set<UserDTO> members;
+    private Set<Long> members;
 
     @XmlElementWrapper(name="Forums")
     @XmlElement(name="forum")
     private Set<ForumDTO> forums;
 
+    private String name;
+
     public ClubDTO() {
     }
 
-    public ClubDTO(Set<UserDTO> members, Set<ForumDTO> forums) {
+    public ClubDTO(Set<Long> members, Set<ForumDTO> forums, String name) {
         this.members = members;
         this.forums = forums;
+        this.name = name;
     }
 
-    public ClubDTO(Long _id, Set<UserDTO> members, Set<ForumDTO> forums) {
+    public ClubDTO(Long _id, Set<Long> members, Set<ForumDTO> forums, String name) {
         this._id = _id;
         this.members = members;
         this.forums = forums;
+        this.name = name;
     }
 
     public Long getId() {
         return _id;
     }
 
-    public Set<UserDTO> getMembers() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Long> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<UserDTO> members) {
+    public void setMembers(Set<Long> members) {
         this.members = members;
     }
 
