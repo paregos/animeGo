@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,9 +85,15 @@ public class ClubResource {
     @GET
     @Path("{id}/forums")
     @Produces({"application/xml", "application/json"})
-    public List<ForumDTO> getClubForums(@PathParam("id") Long id,
+    public Response getClubForums(@PathParam("id") Long id,
                                         @DefaultValue("0") @QueryParam("start") int start,
-                                        @DefaultValue("10") @QueryParam("size") int size) {
+                                        @DefaultValue("10") @QueryParam("size") int size,
+                                        @Context UriInfo uriInfo) {
+
+        URI uri = uriInfo.getAbsolutePath();
+
+        Link previous = null;
+        Link next = null;
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -99,6 +105,20 @@ public class ClubResource {
                             .setMaxResults(size) // Amount of rows to be retrieved.
                             .getResultList();
 
+        if(start > 0) {
+            // There are previous Forums - create a previous link.
+            previous = Link.fromUri(uri + "?start={start}&size={size}")
+                    .rel("prev")
+                    .build(start - 1, size);
+        }
+        if(start + size <= query.getResultList().size()) {
+            // There are successive parolees - create a next link.
+            _logger.info("Making NEXT link");
+            next = Link.fromUri(uri + "?start={start}&size={size}")
+                    .rel("next")
+                    .build(start + 1, size);
+        }
+
         List<ForumDTO> clubForums = new ArrayList<ForumDTO>();
 
         if(allClubForums == null) {
@@ -109,9 +129,22 @@ public class ClubResource {
             }
         }
 
+        GenericEntity<List<ForumDTO>> entity = new GenericEntity<List<ForumDTO>>(clubForums){};
+        // Build a Response that contains the list of Forums plus the link
+        // headers.
+        Response.ResponseBuilder builder = Response.ok(entity);
+        if(previous != null) {
+            builder.links(previous);
+        }
+        if(next != null) {
+            builder.links(next);
+        }
+        Response response = builder.build();
+
+
         em.close();
 
-        return clubForums;
+        return response;
     }
 
     @DELETE
