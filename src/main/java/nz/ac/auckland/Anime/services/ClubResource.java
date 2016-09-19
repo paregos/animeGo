@@ -3,12 +3,15 @@ package nz.ac.auckland.Anime.services;
 import nz.ac.auckland.Anime.domain.Club;
 import nz.ac.auckland.Anime.domain.Forum;
 import nz.ac.auckland.Anime.domain.PersistenceManager;
+import nz.ac.auckland.Anime.domain.User;
 import nz.ac.auckland.Anime.dto.ClubDTO;
 import nz.ac.auckland.Anime.dto.ForumDTO;
+import nz.ac.auckland.Anime.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -24,7 +27,7 @@ public class ClubResource {
 
     // Setup a Logger.
     private static Logger _logger = LoggerFactory
-            .getLogger(nz.ac.auckland.Anime.services.UserResource.class);
+            .getLogger(nz.ac.auckland.Anime.services.ClubResource.class);
 
 
     @PUT
@@ -50,8 +53,6 @@ public class ClubResource {
             for(Forum a : newClub.getForums()){
                 System.out.println(a.getId());
             }
-        } else {
-            System.out.println("YOOooOOo");
         }
         if (newClub.getName() != null) {
             club.setName(newClub.getName());
@@ -100,13 +101,67 @@ public class ClubResource {
 
         List<ForumDTO> clubForums = new ArrayList<ForumDTO>();
 
-        for (Forum b : allClubForums) {
-            clubForums.add(ForumMapper.toDto(b));
+        if(allClubForums == null) {
+            throw new EntityNotFoundException();
+        } else {
+            for (Forum b : allClubForums) {
+                clubForums.add(ForumMapper.toDto(b));
+            }
         }
 
         em.close();
 
         return clubForums;
+    }
+
+    @DELETE
+    @Path ("{id}")
+    @Produces({"application/xml","application/json"})
+    public void deleteClub(@PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Club temp = em.find(Club.class, new Long(id));
+        em.remove(temp);
+
+        em.getTransaction().commit();
+
+        em.close();
+
+    }
+
+
+    @GET
+    @Path("{id}/members")
+    @Produces({"application/xml", "application/json"})
+    public List<UserDTO> getClubMembers(@PathParam("id") Long id,
+                                        @DefaultValue("0") @QueryParam("start") int start,
+                                        @DefaultValue("10") @QueryParam("size") int size) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Query query = em.createQuery("select a.members from Club a where a.id = :id").setParameter("id", id);
+
+        List<User> allClubMembers = query.setFirstResult(start) // Index of first row to be retrieved.
+                .setMaxResults(size) // Amount of rows to be retrieved.
+                .getResultList();
+        em.close();
+
+        List<UserDTO> clubMembers = new ArrayList<UserDTO>();
+        if(allClubMembers == null){
+            throw new EntityNotFoundException();
+        } else {
+            for (User member : allClubMembers) {
+                clubMembers.add(UserMapper.toDto(member));
+
+            }
+        }
+
+        return clubMembers;
     }
 
     @GET
@@ -118,7 +173,13 @@ public class ClubResource {
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
         Club child = em.find(Club.class, new Long(id));
-        ClubDTO club = ClubMapper.toDto(child);
+        ClubDTO club;
+        if(child == null){
+            throw new EntityNotFoundException();
+        } else {
+            club = ClubMapper.toDto(child);
+        }
+
         em.close();
 
         return club;

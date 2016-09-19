@@ -49,4 +49,17 @@ public class CommentDTO {
     public void setDate(Long date) {
         this.date = date;
     }
+
+    public boolean equals(CommentDTO obj){
+//        if(!obj.getDate().equals(this.getDate())){
+//            return false;
+//        }
+////        if(!obj.getComment().equals(this.getComment())){
+////            return false;
+////        }
+//        if(!obj.getCommenterID().equals(this.getCommenterID())){
+//            return false;
+//        }
+        return true;
+    }
 }

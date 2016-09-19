@@ -1,12 +1,12 @@
 package nz.ac.auckland.Anime.services;
 
-import nz.ac.auckland.Anime.domain.Anime;
-import nz.ac.auckland.Anime.domain.PersistenceManager;
+import nz.ac.auckland.Anime.domain.*;
 import nz.ac.auckland.Anime.dto.AnimeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -22,7 +22,7 @@ public class AnimeResource {
 
     // Setup a Logger.
     private static Logger _logger = LoggerFactory
-            .getLogger(nz.ac.auckland.Anime.services.UserResource.class);
+            .getLogger(nz.ac.auckland.Anime.services.AnimeResource.class);
 
     @PUT
     @Path ("{id}")
@@ -80,6 +80,60 @@ public class AnimeResource {
         //_logger.debug("Created parolee with id: " + parolee.getId());
     }
 
+    @DELETE
+    @Path ("{id}")
+    @Produces({"application/xml","application/json"})
+    public void deleteAnime(@PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Anime temp = em.find(Anime.class, new Long(id));
+
+        if(temp != null){
+            Query query = em.createQuery("select a from Forum a");
+            List<Forum> allForums = query.getResultList();
+            query = em.createQuery("select a from Club a");
+            List<Club> allClubs = query.getResultList();
+            for(Forum j : allForums){
+                if(j.getAnimeTopic().getId().equals(temp.getId())){
+                    for(Club c : allClubs){
+                        c.getForums().remove(j);
+                        em.persist(c);
+                    }
+//                    for(Comment s: j.getComments()){
+//                        s.setCommenter(null);
+//                    }
+                    em.remove(j);
+                }
+            }
+
+            query = em.createQuery("select a from Review a");
+            List<Review> allReviews = query.getResultList();
+            for(Review j : allReviews){
+                if(j.getShow().getId().equals(temp.getId())){
+                    em.remove(j);
+                }
+            }
+
+            query = em.createQuery("select a from Rating a");
+            List<Rating> allRating = query.getResultList();
+            for(Rating j : allRating){
+                if(j.getShow().getId().equals(temp.getId())){
+                    em.remove(j);
+                }
+            }
+
+            em.remove(temp);
+        }
+
+        em.getTransaction().commit();
+
+        em.close();
+
+    }
+
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -89,7 +143,13 @@ public class AnimeResource {
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
         Anime temp = em.find(Anime.class, new Long(id));
-        AnimeDTO anime = AnimeMapper.toDto(temp);
+        AnimeDTO anime;
+        if(temp == null){
+            throw new EntityNotFoundException();
+        } else {
+            anime = AnimeMapper.toDto(temp);
+        }
+
 
         em.close();
 

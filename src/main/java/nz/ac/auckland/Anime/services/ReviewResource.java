@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -84,11 +85,35 @@ public class ReviewResource {
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
         Review temp = em.find(Review.class, new Long(id));
-        ReviewDTO review = ReviewMapper.toDto(temp);
+        ReviewDTO review;
+        if(temp == null){
+            throw new EntityNotFoundException();
+        } else {
+            review = ReviewMapper.toDto(temp);
+        }
+
 
         em.close();
 
         return review;
+    }
+
+    @DELETE
+    @Path ("{id}")
+    @Produces({"application/xml","application/json"})
+    public void deleteReview(@PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Review temp = em.find(Review.class, new Long(id));
+        em.remove(temp);
+
+        em.getTransaction().commit();
+
+        em.close();
+
     }
 
     @GET

@@ -37,6 +37,7 @@ public class AnimeApplication extends Application {
       singletons.add(new RatingResource());
       singletons.add(new ForumResource());
       singletons.add(new ClubResource());
+      singletons.add(new EntityNotFoundMapper());
       singletons.add(PersistenceManager.instance());
       setupDummyEntries();
    }

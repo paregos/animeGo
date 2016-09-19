@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/se325-parolee-simple.iml" filepath="$PROJECT_DIR$/se325-parolee-simple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AnimeApplication.iml" filepath="$PROJECT_DIR$/AnimeApplication.iml" />
     </modules>
   </component>
 </project>

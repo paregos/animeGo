@@ -2,11 +2,13 @@ package nz.ac.auckland.Anime.services;
 
 import nz.ac.auckland.Anime.domain.PersistenceManager;
 import nz.ac.auckland.Anime.domain.Rating;
+import nz.ac.auckland.Anime.domain.Review;
 import nz.ac.auckland.Anime.dto.RatingDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -77,6 +79,24 @@ public class RatingResource {
         //_logger.debug("Created parolee with id: " + parolee.getId());
     }
 
+    @DELETE
+    @Path ("{id}")
+    @Produces({"application/xml","application/json"})
+    public void deleteRating(@PathParam("id") int id) {
+
+        PersistenceManager p = PersistenceManager.instance();
+        EntityManager em = p.createEntityManager();
+        em.getTransaction().begin();
+
+        Rating temp = em.find(Rating.class, new Long(id));
+        em.remove(temp);
+
+        em.getTransaction().commit();
+
+        em.close();
+
+    }
+
     @GET
     @Path("{id}")
     @Produces({"application/xml","application/json"})
@@ -86,7 +106,13 @@ public class RatingResource {
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
         Rating child = em.find(Rating.class, new Long(id));
-        RatingDTO rating = RatingMapper.toDto(child);
+        RatingDTO rating;
+        if(child == null){
+            throw new EntityNotFoundException();
+        } else {
+             rating = RatingMapper.toDto(child);
+        }
+
         em.close();
 
         return rating;
