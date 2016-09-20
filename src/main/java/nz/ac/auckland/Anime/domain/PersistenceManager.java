@@ -8,11 +8,9 @@ import javax.persistence.Persistence;
  * Singleton class to manages an EntityManagerFactory. When a
  * PersistenceManager is instantiated, it creates an EntityManagerFactory. When
  * a Web service application component (e.g. an interceptor or resource object)
- * requires a persistence context (database session), it should call the 
- * PersistentManager's createEntityManager() method to acquire one. The 
- * requester is responsible for closing the session. 
- * 
- * @author Ian Warren
+ * requires a persistence context (database session), it should call the
+ * PersistentManager's createEntityManager() method to acquire one. The
+ * requester is responsible for closing the session.
  *
  */
 public class PersistenceManager {

@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
  */
 public class RatingMapper {
 
+    //This maps RatingDTO objects to normal Rating domain model objects
     static Rating toDomainModel(RatingDTO in) {
 
         PersistenceManager p = PersistenceManager.instance();
@@ -32,6 +33,8 @@ public class RatingMapper {
         return rating;
     }
 
+    //This method does the reverse of the method above, translating Rating domain model objects into
+    //RatingDTO objects.
     static RatingDTO toDto(Rating rating) {
 
         Long animeId = rating.getShow() == null ? null : rating.getShow().getId();

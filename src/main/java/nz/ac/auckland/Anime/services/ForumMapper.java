@@ -14,6 +14,9 @@ import java.util.List;
  */
 public class ForumMapper {
 
+    //Maps ForumDTO objects to corresponding Forum objects. Lists of Longs passed in from the
+    //DTO objects are translated to their respective list of objects by mapping the Long values
+    //to object id's.
     static Forum toDomainModel(ForumDTO in) {
 
         List<User> moderators = new ArrayList<User>();
@@ -51,6 +54,9 @@ public class ForumMapper {
         return forum;
     }
 
+    //Maps forum objects to ForumDTO objects, where lists of objects such as users
+    //are represented in the DTO obj as a set of Longs where each long value is the
+    //value of the related user's id.
     static ForumDTO toDto(Forum forum) {
 
         List<Long> moderators = new ArrayList<Long>();

@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
  */
 public class CommentMapper {
 
+    //this method translates commentDTO objects into comment domain model objects
     static Comment toDomainModel(CommentDTO in) {
 
         PersistenceManager p = PersistenceManager.instance();
@@ -25,6 +26,7 @@ public class CommentMapper {
         return comment;
     }
 
+    //Comment objects are translated into commentDTO objects.
     static CommentDTO toDto(Comment comment) {
 
         CommentDTO commentDTO = new CommentDTO(comment.getCommenter().getId(), comment.getComment(), comment.getDate());

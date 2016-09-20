@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class UserMapper {
 
+    //This method maps UserDTO objects into User domain model Objects.
     static User toDomainModel(UserDTO in) {
 
         Set<User> friends = new HashSet<User>();
@@ -36,6 +37,7 @@ public class UserMapper {
         return user;
     }
 
+    //This method does the opposite of the one above, it maps User objects into UserDTO objects.
     static UserDTO toDto(User user) {
 
         Set<Long> friendIds = new HashSet<Long>();

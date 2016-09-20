@@ -26,6 +26,11 @@ public class ForumResource {
     private static Logger _logger = LoggerFactory
             .getLogger(nz.ac.auckland.Anime.services.UserResource.class);
 
+    //Updates a specific forum object identified by the path param id. The forum can
+    //only be updated if no moderators exist in the specified forum, OR the client who
+    //is attempting to update the forum has previously logged in as a User who is a
+    //moderator of the specific forum. This is checked by checking the clients cookie,
+    //one which is given to a client after logging in as a user. 
     @PUT
     @Path ("{id}")
     @Consumes({"application/xml","application/json"})
@@ -67,10 +72,12 @@ public class ForumResource {
         return Response.noContent().build();
     }
 
+    //Creates a new Forum object and persists it to the database, the newly created
+    //objet is based off of the forumDTO obj that is passed in the payload of this method.
     @POST
     @Consumes({"application/xml","application/json"})
     public Response createForum(ForumDTO is) {
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -81,9 +88,11 @@ public class ForumResource {
         em.close();
 
         return Response.created(URI.create("/Forum/" + forum.getId())).build();
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
     }
 
+    //Returns a response containing a specific forum object, where the forum object is
+    //specified by the path param id.
     @GET
     @Path("{id}")
     @Produces({"application/xml","application/json"})
@@ -104,6 +113,9 @@ public class ForumResource {
         return forum;
     }
 
+    //This method is used to get a range of comments that are owned by a certain forum
+    //represented by the path param id. Query params are used to request which index
+    // the range should start at as well as the size of the query.
     @GET
     @Path("{id}/comments")
     @Produces({"application/xml", "application/json"})
@@ -137,6 +149,10 @@ public class ForumResource {
         return forumComments;
     }
 
+    //This method is used to get a range of moderators that are part of a certain forum
+    //represented by the path param id. Hateos link headers are used to return next or
+    // prev links based on the range selected. Query params are used to request which index
+    // the range should start at as well as the size of the query.
     @GET
     @Path("{id}/moderators")
     @Produces({"application/xml", "application/json"})
@@ -197,6 +213,9 @@ public class ForumResource {
         return response;
     }
 
+
+    //Deletes a specfied forum where the forum to be deleted from the database is identified
+    //by the pathparam id.
     @DELETE
     @Path ("{id}")
     @Produces({"application/xml","application/json"})
@@ -226,6 +245,8 @@ public class ForumResource {
 
         }
 
+    //Get all of the forums stored within the database and return them to the user
+    //sending this get request.
     @GET
     @Produces({"application/xml", "application/json"})
     public List<ForumDTO> getAllForum() {

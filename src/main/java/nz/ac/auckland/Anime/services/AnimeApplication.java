@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * JAX-RS application subclass for the Parolee Web service. This class is
+ * JAX-RS application subclass for the Anime Web service. This class is
  * discovered by the JAX-RS run-time and is used to obtain a reference to the
  * UserResource object that will process Web service requests.
  * 
- * The base URI for the Parolee Web service is:
+ * The base URI for the Anime Web service is:
  * 
  * http://<host-name>:<port>/services.
  * 
@@ -29,6 +29,7 @@ public class AnimeApplication extends Application {
    private Set<Object> singletons = new HashSet<Object>();
    private Set<Class<?>> classes = new HashSet<Class<?>>();
 
+   //creating instances of all of the resource classes
    public AnimeApplication()
    {
       singletons.add(new UserResource());
@@ -42,6 +43,7 @@ public class AnimeApplication extends Application {
       setupDummyEntries();
    }
 
+   //creating dummy entries in the h2 local database
    public void setupDummyEntries(){
       PersistenceManager p = PersistenceManager.instance();
       EntityManager em = p.createEntityManager();

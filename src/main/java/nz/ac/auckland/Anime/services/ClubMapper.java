@@ -19,6 +19,9 @@ import java.util.Set;
 public class ClubMapper {
 
 
+    //This method maps ClubDTO objects to Domain Club objects. Two sets of Longs are passed
+    //along with the ClubDTO object representing the set of members and forums that the Club
+    //owns.
     static Club toDomainModel(ClubDTO in) {
 
         Set<User> members = new HashSet<User>();
@@ -53,29 +56,31 @@ public class ClubMapper {
         return club;
     }
 
-    static ClubDTO toDto(Club forum) {
+
+    //When a club is grabbed from the database and before it is passed to the user it is
+    // translated into a clubDTO object using this method.
+    static ClubDTO toDto(Club club) {
 
         Set<Long> members = new HashSet<Long>();
         Set<ForumDTO> forums = new HashSet<ForumDTO>();
 
         //get memebers
-        if(forum.getMembers() != null) {
-            for (User i : forum.getMembers()) {
+        if(club.getMembers() != null) {
+            for (User i : club.getMembers()) {
                 members.add(i.getId());
             }
         }
 
         //get forums
-        if(forum.getForums() != null) {
-            for (Forum i : forum.getForums()) {
+        if(club.getForums() != null) {
+            for (Forum i : club.getForums()) {
                 forums.add(ForumMapper.toDto(i));
             }
         }
 
-        ClubDTO in = new ClubDTO(forum.getId(), members, forums, forum.getName());
+        ClubDTO in = new ClubDTO(club.getId(), members, forums, club.getName());
 
         return in;
 
     }
-
 }

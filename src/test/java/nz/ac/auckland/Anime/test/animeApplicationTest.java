@@ -25,17 +25,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
- /* Simple JUnit test to test the behaviour of the Parolee Web service.
- *
- * The test basically uses the Web service to create new parolees, to query a
- * parolee, to query a range of parolees, to update a parolee and to delete a
- * parolee.
- *
- * The test is implemented using the JAX-RS client API.
- *
- * @author Ian Warren
- */
-
 
 public class animeApplicationTest {
 
@@ -638,7 +627,7 @@ public class animeApplicationTest {
         // first member.
         assertEquals(1, setOfUsers.size());
 
-        // Having requested the only the first parolee (by default), the Web
+        // Having requested the only the first anime (by default), the Web
         // service should respond with a Next link, but not a previous Link.
         assertNull(previous);
         assertNotNull(next);
@@ -701,7 +690,7 @@ public class animeApplicationTest {
         // first member.
         assertEquals(1, setOfForums.size());
 
-        // Having requested the only the first parolee (by default), the Web
+        // Having requested the only the first anime (by default), the Web
         // service should respond with a Next link, but not a previous Link.
         assertNull(previous);
         assertNotNull(next);
@@ -740,7 +729,7 @@ public class animeApplicationTest {
         // first member.
         assertEquals(1, setOfUsers.size());
 
-        // Having requested the only the first parolee (by default), the Web
+        // Having requested the only the first anime (by default), the Web
         // service should respond with a Next link, but not a previous Link.
         assertNull(previous);
         assertNotNull(next);

@@ -27,6 +27,8 @@ public class RatingResource {
             .getLogger(RatingResource.class);
 
 
+    //This method updates a rating object in the database where the object is identified
+    //by the path param id.
     @PUT
     @Path ("{id}")
     @Consumes({"application/xml","application/json"})
@@ -62,10 +64,11 @@ public class RatingResource {
         return Response.noContent().build();
     }
 
+    //This method creates a new reating object and persists it to the database.
     @POST
     @Consumes({"application/xml","application/json"})
     public Response createRating(RatingDTO is) {
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -76,9 +79,10 @@ public class RatingResource {
         em.close();
 
         return Response.created(URI.create("/Rating/" + rating.getId())).build();
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
     }
 
+    //this method deletes a certain rating object from the database.
     @DELETE
     @Path ("{id}")
     @Produces({"application/xml","application/json"})
@@ -97,6 +101,7 @@ public class RatingResource {
 
     }
 
+    //This method retrieves a certain rating object from the database
     @GET
     @Path("{id}")
     @Produces({"application/xml","application/json"})
@@ -118,6 +123,7 @@ public class RatingResource {
         return rating;
     }
 
+    //This method returns all of the rating objects that are held within the database.
     @GET
     @Produces({"application/xml", "application/json"})
     public List<RatingDTO> getAllRating() {

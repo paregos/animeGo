@@ -27,6 +27,7 @@ public class ReviewResource {
     private static Logger _logger = LoggerFactory
             .getLogger(ReviewResource.class);
 
+    //This method updates a specified review object in the database.
     @PUT
     @Path ("{id}")
     @Consumes({"application/xml","application/json"})
@@ -59,10 +60,12 @@ public class ReviewResource {
         return Response.noContent().build();
     }
 
+    //This method creates a new review object based off of a reviewDTO object and
+    //presists it to the database.
     @POST
     @Consumes({"application/xml","application/json"})
     public Response createReview(ReviewDTO is) {
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -73,9 +76,10 @@ public class ReviewResource {
         em.close();
 
         return Response.created(URI.create("/Review/" + review.getId())).build();
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
     }
 
+    //This method retrieves a specified review object
     @GET
     @Path("{id}")
     @Produces({"application/xml","application/json"})
@@ -98,6 +102,7 @@ public class ReviewResource {
         return review;
     }
 
+    //This method deletes a specified review object from the database.
     @DELETE
     @Path ("{id}")
     @Produces({"application/xml","application/json"})
@@ -116,6 +121,8 @@ public class ReviewResource {
 
     }
 
+    //Retrieves all of the review objects that are stored in the database and returns
+    //them to the user that requested them.
     @GET
     @Produces({"application/xml", "application/json"})
     public List<ReviewDTO> getAllRating() {

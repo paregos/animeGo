@@ -13,10 +13,11 @@ import java.util.Set;
  */
 public class AnimeMapper {
 
+    //This method maps animeDTO objects to normal Anime objects, when an animeDTO has a list of sequels
+    //the corresponding animes are found in the database using the list of Longs the animeDTO has.
     static Anime toDomainModel(AnimeDTO in) {
 
         Set<Anime> sequels = new HashSet<Anime>();
-
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
 
@@ -35,6 +36,8 @@ public class AnimeMapper {
         return anime;
     }
 
+    //This method maps Anime objects to AnimeDTO objects when an anime has a list of animes as sequels
+    //each of their ids are instead stored in the DTO objects, this is to reduce complexity for the end user.
     static AnimeDTO toDto(Anime anime) {
 
         Set<Long> sequelIds = new HashSet<Long>();

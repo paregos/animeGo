@@ -16,11 +16,14 @@ import java.util.List;
 
 @Path("/User")
 public class UserResource {
+
 	// Setup a Logger.
 	private static Logger _logger = LoggerFactory
 			.getLogger(UserResource.class);
 
 
+	//Update a specifc User object in the database where the specific user is identified,
+	//by the path param id.
 	@PUT
 	@Path ("{id}")
 	@Consumes({"application/xml","application/json"})
@@ -59,10 +62,12 @@ public class UserResource {
 		return Response.noContent().build();
 	}
 
+	//Creates a new User object based off of a UserDTO object, the newly created User
+	//object is then persisted into the database.
 	@POST
 	@Consumes({"application/xml","application/json"})
 	public Response createUser(UserDTO is) {
-		//_logger.debug("Created parolee with id: " + parolee.getId());
+		//_logger.debug("Created anime with id: " + anime.getId());
 
 			PersistenceManager p = PersistenceManager.instance();
 			EntityManager em = p.createEntityManager();
@@ -80,9 +85,11 @@ public class UserResource {
 			_logger.info("jj "+user.getId() + "");
 
 		return Response.created(URI.create("/User/" + user.getId())).build();
-		//_logger.debug("Created parolee with id: " + parolee.getId());
+		//_logger.debug("Created anime with id: " + anime.getId());
 	}
 
+	//Retrieves a specific User object that is stored in the database where the specific
+	//User is indetified by the path param id.
 	@GET
 	@Path ("{id}")
 	@Produces({"application/xml","application/json"})
@@ -107,6 +114,9 @@ public class UserResource {
 		return user;
 	}
 
+	//Attempts to Log a user in where the user loggin in is represented by the path param
+	//id. When a user logs in, if the id is valid a cookie is returned to the client, this
+	//cookie is then used later on when a user tries to update a forum.
 	@GET
 	@Path ("{id}/login")
 	@Produces({"application/xml","application/json"})
@@ -130,6 +140,8 @@ public class UserResource {
 		return Response.noContent().cookie(new NewCookie("name", temp.getId().toString())).build();
 	}
 
+	//This method deletes a specific user from the database where the user being deleted is
+	//identified by the path param id.
 	@DELETE
 	@Path ("{id}")
 	@Produces({"application/xml","application/json"})
@@ -192,6 +204,7 @@ public class UserResource {
 
 	}
 
+	//Retrieves all User objects from the database and sends them as a list to the user who requested them.
 	@GET
 	@Produces({"application/xml", "application/json"})
 	public List<UserDTO> getAllUser() {

@@ -30,6 +30,8 @@ public class ClubResource {
             .getLogger(nz.ac.auckland.Anime.services.ClubResource.class);
 
 
+    //Updates a club with a certain id, any content that is passed in the DTO object param
+    // is then placed in the corresponding database entry.
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
@@ -65,10 +67,12 @@ public class ClubResource {
         return Response.noContent().build();
     }
 
+
+    //Create a new club and return a response corresponding to the newly created club.
     @POST
     @Consumes({"application/xml", "application/json"})
     public Response createClub(ClubDTO is) {
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -79,9 +83,13 @@ public class ClubResource {
         em.close();
 
         return Response.created(URI.create("/Club/" + club.getId())).build();
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+        //_logger.debug("Created anime with id: " + anime.getId());
     }
 
+    //This method is used to get a range of forums that are owned by a certain club
+    //represented by the path param id. Hateos link headers are used to return next or
+    // prev links based on the range selected. Query params are used to request which index
+    // the range should start at as well as the size of the query.
     @GET
     @Path("{id}/forums")
     @Produces({"application/xml", "application/json"})
@@ -147,6 +155,7 @@ public class ClubResource {
         return response;
     }
 
+    //deletes a club with a specified id from the database.
     @DELETE
     @Path ("{id}")
     @Produces({"application/xml","application/json"})
@@ -165,7 +174,10 @@ public class ClubResource {
 
     }
 
-
+    //This method is used to get a range of members that are owned by a certain club
+    //represented by the path param id. Hateos link headers are used to return next or
+    // prev links based on the range selected. Query params are used to request which index
+    // the range should start at as well as the size of the query.
     @GET
     @Path("{id}/members")
     @Produces({"application/xml", "application/json"})
@@ -230,6 +242,8 @@ public class ClubResource {
         return response;
     }
 
+    //This method returns a specific club from the database indentified by the
+    //path param id.
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -251,6 +265,8 @@ public class ClubResource {
         return club;
     }
 
+    //this method gets all of the clubs that are in the database and returns them to
+    //the user.
     @GET
     @Produces({"application/xml", "application/json"})
     public List<ClubDTO> getAllRating() {

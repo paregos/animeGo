@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
  */
 public class ReviewMapper {
 
+    //This method maps ReviewDTO objects to Review objects.
     static Review toDomainModel(ReviewDTO in) {
 
         PersistenceManager p = PersistenceManager.instance();
@@ -36,6 +37,8 @@ public class ReviewMapper {
         return review;
     }
 
+    //This method does the opposite as above, it essientially maps Review domain model objects
+    //to ReviewDTO objects.
     static ReviewDTO toDto(Review review) {
 
         Long animeId = review.getShow() == null ? null : review.getShow().getId();

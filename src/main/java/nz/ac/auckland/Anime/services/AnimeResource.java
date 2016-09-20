@@ -22,6 +22,7 @@ import java.util.List;
 @Path("/Anime")
 public class AnimeResource {
 
+    //creating a list that will hold all of the clients that have subscribed
     protected List<AsyncResponse> responses = new
             ArrayList<AsyncResponse>( );
 
@@ -30,6 +31,8 @@ public class AnimeResource {
             .getLogger(nz.ac.auckland.Anime.services.AnimeResource.class);
 
 
+    //when this method is invoked users will be subscribed to anime, any new anime that
+    //are posted to the post method below will cause the subscribed clients to be notified
     @GET
     @Path("subscribe")
     @Produces({"application/xml","application/json"})
@@ -38,6 +41,9 @@ public class AnimeResource {
         responses.add( response );
     }
 
+    //this http method updates a specfic anime object that is contained within the h2 database
+    //fields of the anime to be updated can be null, indicating no change, or contain content
+    //indicating that this content should override the related content
     @PUT
     @Path ("{id}")
     @Consumes({"application/xml","application/json"})
@@ -76,6 +82,10 @@ public class AnimeResource {
         return Response.noContent().build();
     }
 
+    //To create a new anime object in the database this method is invoked, like other methods in the
+    //anime application xml or json formatted data can be passed into the method representing animeDTO
+    //objects, the objects are then changed into normal anime objects using the animeMapper method
+    //toDomainModel, the newly formed object is then persisted into the database.
     @POST
     @Consumes({"application/xml", "application/json"})
     public Response createAnime(AnimeDTO is) {
@@ -96,10 +106,16 @@ public class AnimeResource {
         }
         responses.clear();
 
+        _logger.debug("Created anime with id: " + anime.getId());
         return Response.created(URI.create("/Anime/" + anime.getId())).build();
-        //_logger.debug("Created parolee with id: " + parolee.getId());
+
     }
 
+
+    //This http method deletes a specfied anime from the database, a path variable id is used to
+    //specify which anime should be deleted where id is equal to the anime to be deleted id. Any
+    //other object that references the deleted anime object in the database will have their references
+    //to the anime removed safely.
     @DELETE
     @Path ("{id}")
     @Produces({"application/xml","application/json"})
@@ -154,6 +170,8 @@ public class AnimeResource {
 
     }
 
+    //This method gets a specified anime from the database where the path parameter id is
+    // equal to the anime id that is wanting to be retrieved.
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -176,6 +194,8 @@ public class AnimeResource {
         return anime;
     }
 
+    //When this method is invoked all anime objects that are stored within the database are
+    //retrieved.
     @GET
     @Produces({"application/xml", "application/json"})
     public List<AnimeDTO> getAllAnime() {
