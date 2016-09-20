@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.ArrayList;
@@ -50,7 +51,6 @@ public class UserResource {
 		if(newUser.getUsername() != null){
 			user.setUsername(newUser.getUsername());
 		}
-
 
 		em.persist(user);
 		em.getTransaction().commit();
@@ -104,9 +104,30 @@ public class UserResource {
 
 		em.close();
 
-
-
 		return user;
+	}
+
+	@GET
+	@Path ("{id}/login")
+	@Produces({"application/xml","application/json"})
+	public Response loginUser(@PathParam("id") int id) {
+
+		PersistenceManager p = PersistenceManager.instance();
+		EntityManager em = p.createEntityManager();
+		em.getTransaction().begin();
+		User temp = em.find(User.class, new Long(id));
+		UserDTO user;
+		if(temp == null){
+			throw new EntityNotFoundException();
+		} else {
+			user = UserMapper.toDto(temp);
+		}
+
+		em.close();
+
+
+		System.out.println("LOGGING IN AS NEW USER " +temp.getId().toString());
+		return Response.noContent().cookie(new NewCookie("name", temp.getId().toString())).build();
 	}
 
 	@DELETE
@@ -137,7 +158,6 @@ public class UserResource {
 			query = em.createQuery("select a from Forum a");
 			List<Forum> allForums = query.getResultList();
 			for(Forum j : allForums){
-
 				for(Comment c : j.getComments()){
 					if(c.getCommenter().getId().equals(temp.getId())){
 						j.getComments().remove(c);

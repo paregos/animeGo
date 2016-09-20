@@ -87,7 +87,7 @@ public class ClubResource {
     @Produces({"application/xml", "application/json"})
     public Response getClubForums(@PathParam("id") Long id,
                                         @DefaultValue("0") @QueryParam("start") int start,
-                                        @DefaultValue("10") @QueryParam("size") int size,
+                                        @DefaultValue("1") @QueryParam("size") int size,
                                         @Context UriInfo uriInfo) {
 
         URI uri = uriInfo.getAbsolutePath();

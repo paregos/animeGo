@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,30 +29,38 @@ public class ForumResource {
     @PUT
     @Path ("{id}")
     @Consumes({"application/xml","application/json"})
-    public Response editForum(ForumDTO is, @PathParam("id") int id) {
+    public Response editForum(ForumDTO is, @PathParam("id") int id, @CookieParam("name") Long cookie) {
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
 
+        System.out.println(cookie.toString());
+        User moderator = em.find(User.class, cookie);
+
         //getting the post request
         Forum newForum = ForumMapper.toDomainModel(is);
-
         //finding the associated forum
         Forum forum = em.find(Forum.class, new Long(id));
 
-        if(newForum.getModerators() != null ){
-            forum.setModerators(newForum.getModerators());
-        }
-        if(newForum.getComments() != null ){
-            forum.setComments(newForum.getComments());
-        }
-        if(newForum.getAnimeTopic() != null ){
-            forum.setAnimeTopic(newForum.getAnimeTopic());
+        if ((forum.getModerators().contains(moderator) || forum.getModerators().isEmpty()) && (forum.getModerators() != null)){
+            if(newForum.getModerators() != null ){
+                forum.setModerators(newForum.getModerators());
+            }
+            if(newForum.getComments() != null ){
+                forum.setComments(newForum.getComments());
+            }
+            if(newForum.getAnimeTopic() != null ){
+                forum.setAnimeTopic(newForum.getAnimeTopic());
+            }
+
+            em.persist(forum);
+            em.getTransaction().commit();
+
+        } else {
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
 
-        em.persist(forum);
-        em.getTransaction().commit();
         em.close();
 
         return Response.noContent().build();
@@ -99,7 +107,7 @@ public class ForumResource {
     @Path("{id}/comments")
     @Produces({"application/xml", "application/json"})
     public List<CommentDTO> getForumComments(@PathParam("id") Long id,
-                                        @DefaultValue("10") @QueryParam("size") int size) {
+                                             @DefaultValue("10") @QueryParam("size") int size) {
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -131,9 +139,15 @@ public class ForumResource {
     @GET
     @Path("{id}/moderators")
     @Produces({"application/xml", "application/json"})
-    public List<UserDTO> getForumModerators(@PathParam("id") Long id,
-                                        @DefaultValue("0") @QueryParam("start") int start,
-                                        @DefaultValue("10") @QueryParam("size") int size) {
+    public Response getForumModerators(@PathParam("id") Long id,
+                                            @DefaultValue("0") @QueryParam("start") int start,
+                                            @DefaultValue("10") @QueryParam("size") int size,
+                                            @Context UriInfo uriInfo) {
+
+        URI uri = uriInfo.getAbsolutePath();
+
+        Link previous = null;
+        Link next = null;
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -144,16 +158,42 @@ public class ForumResource {
         List<User> allForumModerators = query.setFirstResult(start) // Index of first row to be retrieved.
                 .setMaxResults(size) // Amount of rows to be retrieved.
                 .getResultList();
-        em.close();
+
+        if(start > 0) {
+            // There are previous moderators - create a previous link.
+            previous = Link.fromUri(uri + "?start={start}&size={size}")
+                    .rel("prev")
+                    .build(start - 1, size);
+        }
+        if(start + size <= query.getResultList().size()) {
+            // There are successive moderators - create a next link.
+            _logger.info("Making NEXT link");
+            next = Link.fromUri(uri + "?start={start}&size={size}")
+                    .rel("next")
+                    .build(start + 1, size);
+        }
 
         List<UserDTO> forumModerators = new ArrayList<UserDTO>();
 
         for (User member : allForumModerators) {
             forumModerators.add(UserMapper.toDto(member));
-
         }
 
-        return forumModerators;
+        GenericEntity<List<UserDTO>> entity = new GenericEntity<List<UserDTO>>(forumModerators){};
+        // Build a Response that contains the list of Members plus the link
+        // headers.
+        Response.ResponseBuilder builder = Response.ok(entity);
+        if(previous != null) {
+            builder.links(previous);
+        }
+        if(next != null) {
+            builder.links(next);
+        }
+        Response response = builder.build();
+
+        em.close();
+
+        return response;
     }
 
     @DELETE

@@ -345,14 +345,23 @@ public class animeApplicationTest {
 
         ForumDTO forum = new ForumDTO( new ArrayList<Long>(1), comments, new Long(1) );
 
+        _client.target(WEB_SERVICE_URI+"User/1/login").request()
+                .accept("application/xml").get();
+
+        //creating assoicated cookie
+        NewCookie cookie =new NewCookie("name", new Long(1).toString());
+
         Response response = _client
                 .target(WEB_SERVICE_URI+"Forum/1").request()
+                .cookie(cookie)
                 .put(Entity.xml(forum));
         if (response.getStatus() != 204) {
             fail("Failed to create new Forum");
         }
 
         response.close();
+
+
 
         // Query the Web service for the new User.
         ForumDTO forumFromService = _client.target(WEB_SERVICE_URI+"Forum/1").request()
@@ -618,10 +627,6 @@ public class animeApplicationTest {
                 .accept("application/xml").get();
 
         // Extract links and entity data from the response.
-        for(Link a : response.getLinks()){
-            System.out.println(a);
-        }
-
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
@@ -685,10 +690,6 @@ public class animeApplicationTest {
                 .accept("application/xml").get();
 
         // Extract links and entity data from the response.
-        for(Link a : response.getLinks()){
-            System.out.println(a);
-        }
-
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
@@ -718,6 +719,45 @@ public class animeApplicationTest {
         assertEquals(1, setOfForums.size());
         assertEquals(new Long(2), setOfForums.get(0).getId());
         assertEquals("<" + WEB_SERVICE_URI + "Club/1/forums?start=0&size=1>; rel=\"prev\"", previous.toString());
+    }
+
+    @Test
+    public void queryRangeOfForumModerators() {
+
+        // Query the Web service for the set of moderators.
+        Response response = _client.target(WEB_SERVICE_URI+"Forum/1/moderators?start=0&size=1").request()
+                .accept("application/xml").get();
+
+        // Extract links and entity data from the response.
+        Link previous = response.getLink("prev");
+        Link next = response.getLink("next");
+
+        System.out.println(next);
+        List<UserDTO> setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
+        response.close();
+
+//        // The Web service should respond with a list containing only the
+        // first member.
+        assertEquals(1, setOfUsers.size());
+
+        // Having requested the only the first parolee (by default), the Web
+        // service should respond with a Next link, but not a previous Link.
+        assertNull(previous);
+        assertNotNull(next);
+
+        // Invoke next link and extract response data.
+        response = _client
+                .target(next).request().get();
+        previous = response.getLink("prev");
+        next = response.getLink("next");
+        setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
+        response.close();
+
+        // The second Member should be returned along with Previous and Next
+        // links to the adjacent members.
+        assertEquals(1, setOfUsers.size());
+        assertEquals(new Long(2), setOfUsers.get(0).getId());
+        assertEquals("<" + WEB_SERVICE_URI + "Forum/1/moderators?start=0&size=1>; rel=\"prev\"", previous.toString());
     }
 
 
