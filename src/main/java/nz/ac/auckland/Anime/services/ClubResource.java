@@ -51,7 +51,7 @@ public class ClubResource {
         if (newClub.getForums() != null) {
             club.setForums(newClub.getForums());
             for(Forum a : newClub.getForums()){
-                System.out.println(a.getId());
+                _logger.info(a.getId().toString());
             }
         }
         if (newClub.getName() != null) {

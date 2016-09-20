@@ -126,7 +126,7 @@ public class UserResource {
 		em.close();
 
 
-		System.out.println("LOGGING IN AS NEW USER " +temp.getId().toString());
+		_logger.info("LOGGING IN AS NEW USER " +temp.getId().toString());
 		return Response.noContent().cookie(new NewCookie("name", temp.getId().toString())).build();
 	}
 

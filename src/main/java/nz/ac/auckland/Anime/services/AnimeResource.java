@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.ws.rs.*;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.ArrayList;
@@ -20,9 +22,21 @@ import java.util.List;
 @Path("/Anime")
 public class AnimeResource {
 
+    protected List<AsyncResponse> responses = new
+            ArrayList<AsyncResponse>( );
+
     // Setup a Logger.
     private static Logger _logger = LoggerFactory
             .getLogger(nz.ac.auckland.Anime.services.AnimeResource.class);
+
+
+    @GET
+    @Path("subscribe")
+    @Produces({"application/xml","application/json"})
+    public void subscribe(
+            @Suspended AsyncResponse response ) {
+        responses.add( response );
+    }
 
     @PUT
     @Path ("{id}")
@@ -75,6 +89,12 @@ public class AnimeResource {
         em.close();
 
         _logger.info("jj " + anime.getId() + "");
+
+        // Notify subscribers.
+        for (AsyncResponse response : responses) {
+            response.resume(anime);
+        }
+        responses.clear();
 
         return Response.created(URI.create("/Anime/" + anime.getId())).build();
         //_logger.debug("Created parolee with id: " + parolee.getId());

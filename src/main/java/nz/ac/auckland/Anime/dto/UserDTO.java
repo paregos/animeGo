@@ -1,11 +1,12 @@
 package nz.ac.auckland.Anime.dto;
+
 import javax.xml.bind.annotation.*;
 import java.util.Set;
 
 /**
  * Created by Ben on 9/8/2016.
  */
-@XmlRootElement(name="User")
+@XmlRootElement(name = "User")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UserDTO {
 
@@ -17,8 +18,8 @@ public class UserDTO {
 
     private String firstname;
 
-    @XmlElementWrapper(name="followingIds")
-    @XmlElement(name="userId")
+    @XmlElementWrapper(name = "followingIds")
+    @XmlElement(name = "userId")
     private Set<Long> followIds;
     //private Set<User> friends;
 
@@ -32,7 +33,7 @@ public class UserDTO {
         this.username = username;
         this.lastname = lastname;
         this.firstname = firstname;
-         this.followIds = follow;
+        this.followIds = follow;
     }
 
     public UserDTO(Long _id, String username, String lastname, String firstname, Set<Long> followIds) {
@@ -47,7 +48,8 @@ public class UserDTO {
         this(username, null, null);
     }
 
-    public UserDTO() {}
+    public UserDTO() {
+    }
 
     public Long getId() {
         return _id;

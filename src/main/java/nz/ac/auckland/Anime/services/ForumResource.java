@@ -35,9 +35,10 @@ public class ForumResource {
         EntityManager em = p.createEntityManager();
         em.getTransaction().begin();
 
-        System.out.println(cookie.toString());
-        User moderator = em.find(User.class, cookie);
-
+        User moderator = new User();
+        if(cookie != null) {
+            moderator = em.find(User.class, cookie);
+        }
         //getting the post request
         Forum newForum = ForumMapper.toDomainModel(is);
         //finding the associated forum

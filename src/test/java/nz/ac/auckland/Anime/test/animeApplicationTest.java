@@ -5,9 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.*;
 import javax.ws.rs.core.*;
 
 import nz.ac.auckland.Anime.domain.Comment;
@@ -24,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
  /* Simple JUnit test to test the behaviour of the Parolee Web service.
  *
@@ -630,7 +630,7 @@ public class animeApplicationTest {
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
-        System.out.println(next);
+        _logger.info(next);
         List<UserDTO> setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
         response.close();
 
@@ -693,7 +693,7 @@ public class animeApplicationTest {
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
-        System.out.println(next);
+        _logger.info(next);
         List<ForumDTO> setOfForums = response.readEntity(new GenericType<List<ForumDTO>>() {});
         response.close();
 
@@ -732,7 +732,7 @@ public class animeApplicationTest {
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
-        System.out.println(next);
+        _logger.info(next);
         List<UserDTO> setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
         response.close();
 
@@ -761,5 +761,42 @@ public class animeApplicationTest {
     }
 
 
+    @Test
+    public void testAsyncAnimeCreation(){
+
+        Client subscriber = ClientBuilder.newClient( );
+
+        Future<AnimeDTO> target1 = subscriber.target(WEB_SERVICE_URI+ "Anime/subscribe").request().async().get(new InvocationCallback<AnimeDTO>() {
+            public void completed(AnimeDTO anime) {
+                assertEquals(anime.getTitle(), "junChan");
+                assertEquals(anime.getSynopsis(), "Jun Xu");
+            }
+            public void failed(Throwable t) {
+                fail();
+            }
+        });
+
+
+        AnimeDTO anime = new AnimeDTO("junChan", new Long(12), new Long(2016), "Jun Xu");
+
+        Response response = _client
+                .target(WEB_SERVICE_URI+"Anime").request()
+                .post(Entity.xml(anime));
+        if (response.getStatus() != 201) {
+            fail("Failed to create new Anime");
+        }
+
+        String location = response.getLocation().toString();
+        response.close();
+
+        try {
+            target1.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
