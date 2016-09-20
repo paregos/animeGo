@@ -112,7 +112,7 @@ public class ClubResource {
                     .build(start - 1, size);
         }
         if(start + size <= query.getResultList().size()) {
-            // There are successive parolees - create a next link.
+            // There are successive forums - create a next link.
             _logger.info("Making NEXT link");
             next = Link.fromUri(uri + "?start={start}&size={size}")
                     .rel("next")
@@ -169,9 +169,15 @@ public class ClubResource {
     @GET
     @Path("{id}/members")
     @Produces({"application/xml", "application/json"})
-    public List<UserDTO> getClubMembers(@PathParam("id") Long id,
+    public Response getClubMembers(@PathParam("id") Long id,
                                         @DefaultValue("0") @QueryParam("start") int start,
-                                        @DefaultValue("10") @QueryParam("size") int size) {
+                                        @DefaultValue("1") @QueryParam("size") int size,
+                                        @Context UriInfo uriInfo) {
+
+        URI uri = uriInfo.getAbsolutePath();
+
+        Link previous = null;
+        Link next = null;
 
         PersistenceManager p = PersistenceManager.instance();
         EntityManager em = p.createEntityManager();
@@ -182,19 +188,46 @@ public class ClubResource {
         List<User> allClubMembers = query.setFirstResult(start) // Index of first row to be retrieved.
                 .setMaxResults(size) // Amount of rows to be retrieved.
                 .getResultList();
-        em.close();
+
+        if(start > 0) {
+            // There are previous members - create a previous link.
+            previous = Link.fromUri(uri + "?start={start}&size={size}")
+                    .rel("prev")
+                    .build(start - 1, size);
+        }
+        if(start + size <= query.getResultList().size()) {
+            // There are successive memebrs - create a next link.
+            _logger.info("Making NEXT link");
+            next = Link.fromUri(uri + "?start={start}&size={size}")
+                    .rel("next")
+                    .build(start + 1, size);
+        }
 
         List<UserDTO> clubMembers = new ArrayList<UserDTO>();
+
         if(allClubMembers == null){
             throw new EntityNotFoundException();
         } else {
             for (User member : allClubMembers) {
                 clubMembers.add(UserMapper.toDto(member));
-
             }
         }
 
-        return clubMembers;
+        GenericEntity<List<UserDTO>> entity = new GenericEntity<List<UserDTO>>(clubMembers){};
+        // Build a Response that contains the list of Members plus the link
+        // headers.
+        Response.ResponseBuilder builder = Response.ok(entity);
+        if(previous != null) {
+            builder.links(previous);
+        }
+        if(next != null) {
+            builder.links(next);
+        }
+        Response response = builder.build();
+
+        em.close();
+
+        return response;
     }
 
     @GET
@@ -239,4 +272,5 @@ public class ClubResource {
 
         return allClubDTO;
     }
+
 }

@@ -51,6 +51,10 @@ public class AnimeApplication extends Application {
       User user = new User("ben1","ben2","ben3");
       em.persist(user);
 
+      //Creating a user dummy obj
+      User user2 = new User("asd","asd","aaa");
+      em.persist(user2);
+
       //Creating a anime dummy obj
       Anime anime = new Anime("umaruChan", new Long(12), new Long(2016), "Jun Xu");
       em.persist(anime);
@@ -67,16 +71,29 @@ public class AnimeApplication extends Application {
       Comment comment = new Comment(user, "this is a comment", new Long(1900));
       List<User> moderators = new ArrayList<User>();
       moderators.add(user);
+      moderators.add(user2);
       List<Comment> comments = new ArrayList<Comment>();
       comments.add(comment);
       Forum forum = new Forum( moderators, comments, anime );
       em.persist(forum);
 
+      //Creating a forum dummy obj
+      Comment comment1 = new Comment(user, "this is a comment", new Long(1900));
+      List<User> moderators1 = new ArrayList<User>();
+      moderators.add(user);
+      moderators.add(user2);
+      List<Comment> comments1 = new ArrayList<Comment>();
+      comments1.add(comment1);
+      Forum forum1 = new Forum( moderators, comments, anime );
+      em.persist(forum1);
+
       //creating a club dummy obj
       Set<User> members = new HashSet<User>();
       members.add(user);
+      members.add(user2);
       Set<Forum> forums = new HashSet<Forum>();
       forums.add(forum);
+      forums.add(forum1);
       Club club = new Club(members, forums, "The New Game club");
       em.persist(club);
 

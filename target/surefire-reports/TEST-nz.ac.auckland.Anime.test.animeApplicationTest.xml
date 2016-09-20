@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="18" failures="0" name="nz.ac.auckland.Anime.test.animeApplicationTest" time="1.187" errors="0" skipped="0">
+<testsuite tests="20" failures="0" name="nz.ac.auckland.Anime.test.animeApplicationTest" time="1.234" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2016.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -11,7 +11,7 @@
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7540"/>
+    <property name="idea.launcher.port" value="7536"/>
     <property name="user.script" value=""/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -63,22 +63,24 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addAnime" time="0.581"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addForum" time="0.035"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteAnime" time="0.166"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addClub" time="0.045"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addUser" time="0.027"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteForum" time="0.025"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateRating" time="0.029"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateReview" time="0.027"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteRating" time="0.026"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteReview" time="0.047"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateAnime" time="0.021"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addAnime" time="0.505"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addForum" time="0.037"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteAnime" time="0.129"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addClub" time="0.04"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addUser" time="0.028"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteForum" time="0.024"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateRating" time="0.03"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateReview" time="0.022"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteRating" time="0.021"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteReview" time="0.051"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateAnime" time="0.019"/>
   <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateForum" time="0.025"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateClub" time="0.022"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateUser" time="0.018"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addRating" time="0.021"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addReview" time="0.015"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateClub" time="0.039"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="updateUser" time="0.016"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addRating" time="0.017"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="addReview" time="0.017"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="queryRangeOfClubMembers" time="0.093"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="queryRangeOfClubForums" time="0.055"/>
   <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteClub" time="0.024"/>
-  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteUser" time="0.033"/>
+  <testcase classname="nz.ac.auckland.Anime.test.animeApplicationTest" name="deleteUser" time="0.042"/>
 </testsuite>

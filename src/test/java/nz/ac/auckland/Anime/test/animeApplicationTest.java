@@ -1,13 +1,14 @@
 package nz.ac.auckland.Anime.test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import nz.ac.auckland.Anime.domain.Comment;
 import nz.ac.auckland.Anime.domain.User;
@@ -63,7 +64,7 @@ public class animeApplicationTest {
 	@Test
 	public void addUser() {
 
-        UserDTO user = new UserDTO("ben1","ben2","ben3", new HashSet<Long>(1));
+        UserDTO user = new UserDTO("ben1","ben2","ben3");
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"User").request()
@@ -375,12 +376,20 @@ public class animeApplicationTest {
         List<CommentDTO> comments = new ArrayList<CommentDTO>();
         comments.add(comment);
 
-        ForumDTO forum = new ForumDTO( new Long(1),  null, comments, null );
+        List<Long> users = new ArrayList<Long>();
+        users.add(new Long (1));
+        users.add(new Long (2));
+        ForumDTO forum = new ForumDTO( new Long(1),  users, comments, new Long(1) );
+        ForumDTO forum1 = new ForumDTO( new Long(2),  users, comments, new Long(1) );
 
         Set<ForumDTO> forums = new HashSet<ForumDTO>();
         forums.add(forum);
+        forums.add(forum1);
 
-        ClubDTO club = new ClubDTO( new HashSet<Long>(1), forums, "asdasdasd" );
+        Set<Long> users1 = new HashSet<Long>();
+        users1.add(new Long (1));
+        users1.add(new Long (2));
+        ClubDTO club = new ClubDTO( users1, forums, "asdasdasd" );
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"Club/1").request()
@@ -404,7 +413,7 @@ public class animeApplicationTest {
     @Test
     public void deleteUser() {
 
-        UserDTO user = new UserDTO("ben1","ben2","ben3", new HashSet<Long>(1));
+        UserDTO user = new UserDTO("ben1","ben2","ben3");
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"User").request()
@@ -576,6 +585,141 @@ public class animeApplicationTest {
 
             assertEquals(response.getStatus(), 404);
     }
+
+    @Test
+    public void queryRangeOfClubMembers() {
+
+        CommentDTO comment = new CommentDTO(new Long(1), "this is a comment", new Long(1900));
+        List<CommentDTO> comments = new ArrayList<CommentDTO>();
+        comments.add(comment);
+
+        List<Long> users = new ArrayList<Long>();
+        users.add(new Long (1));
+        users.add(new Long (2));
+        ForumDTO forum = new ForumDTO( new Long(1),  users, comments, new Long(1) );
+
+        Set<ForumDTO> forums = new HashSet<ForumDTO>();
+        forums.add(forum);
+
+        ClubDTO club = new ClubDTO( new HashSet<Long>(1), forums, "The new game club" );
+
+        Response response = _client
+                .target(WEB_SERVICE_URI+"Club").request()
+                .post(Entity.xml(club));
+        if (response.getStatus() != 201) {
+            fail("Failed to create new Club");
+        }
+
+        String location = response.getLocation().toString();
+        response.close();
+
+        // Query the Web service for a range of user.
+        response = _client.target(WEB_SERVICE_URI+"Club/1/members?start=0&size=1").request()
+                .accept("application/xml").get();
+
+        // Extract links and entity data from the response.
+        for(Link a : response.getLinks()){
+            System.out.println(a);
+        }
+
+        Link previous = response.getLink("prev");
+        Link next = response.getLink("next");
+
+        System.out.println(next);
+        List<UserDTO> setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
+        response.close();
+
+//        // The Web service should respond with a list containing only the
+        // first member.
+        assertEquals(1, setOfUsers.size());
+
+        // Having requested the only the first parolee (by default), the Web
+        // service should respond with a Next link, but not a previous Link.
+        assertNull(previous);
+        assertNotNull(next);
+
+        // Invoke next link and extract response data.
+        response = _client
+                .target(next).request().get();
+        previous = response.getLink("prev");
+        next = response.getLink("next");
+        setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
+        response.close();
+
+        // The second Member should be returned along with Previous and Next
+        // links to the adjacent members.
+        assertEquals(1, setOfUsers.size());
+        assertEquals(new Long(2), setOfUsers.get(0).getId());
+        assertEquals("<" + WEB_SERVICE_URI + "Club/1/members?start=0&size=1>; rel=\"prev\"", previous.toString());
+    }
+
+    @Test
+    public void queryRangeOfClubForums() {
+
+        CommentDTO comment = new CommentDTO(new Long(1), "this is a comment", new Long(1900));
+        List<CommentDTO> comments = new ArrayList<CommentDTO>();
+        comments.add(comment);
+
+        List<Long> users = new ArrayList<Long>();
+        users.add(new Long (1));
+        users.add(new Long (2));
+        ForumDTO forum = new ForumDTO( new Long(1),  users, comments, new Long(1) );
+
+        Set<ForumDTO> forums = new HashSet<ForumDTO>();
+        forums.add(forum);
+
+        ClubDTO club = new ClubDTO( new HashSet<Long>(1), forums, "The new game club" );
+
+        Response response = _client
+                .target(WEB_SERVICE_URI+"Club").request()
+                .post(Entity.xml(club));
+        if (response.getStatus() != 201) {
+            fail("Failed to create new Club");
+        }
+
+        String location = response.getLocation().toString();
+        response.close();
+
+        // Query the Web service for a range of user.
+        response = _client.target(WEB_SERVICE_URI+"Club/1/forums?start=0&size=1").request()
+                .accept("application/xml").get();
+
+        // Extract links and entity data from the response.
+        for(Link a : response.getLinks()){
+            System.out.println(a);
+        }
+
+        Link previous = response.getLink("prev");
+        Link next = response.getLink("next");
+
+        System.out.println(next);
+        List<ForumDTO> setOfForums = response.readEntity(new GenericType<List<ForumDTO>>() {});
+        response.close();
+
+//        // The Web service should respond with a list containing only the
+        // first member.
+        assertEquals(1, setOfForums.size());
+
+        // Having requested the only the first parolee (by default), the Web
+        // service should respond with a Next link, but not a previous Link.
+        assertNull(previous);
+        assertNotNull(next);
+
+        // Invoke next link and extract response data.
+        response = _client
+                .target(next).request().get();
+        previous = response.getLink("prev");
+        next = response.getLink("next");
+        setOfForums = response.readEntity(new GenericType<List<ForumDTO>>() {});
+        response.close();
+
+        // The second Member should be returned along with Previous and Next
+        // links to the adjacent members.
+        assertEquals(1, setOfForums.size());
+        assertEquals(new Long(2), setOfForums.get(0).getId());
+        assertEquals("<" + WEB_SERVICE_URI + "Club/1/forums?start=0&size=1>; rel=\"prev\"", previous.toString());
+    }
+
 
 
 }
