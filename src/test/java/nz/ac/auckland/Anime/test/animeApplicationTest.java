@@ -50,6 +50,9 @@ public class animeApplicationTest {
         _client.close();
     }
 
+
+    //Tests the process of creating a new User and persisting it to the database. The
+    //corresponding Get Method is also tested in this method.
 	@Test
 	public void addUser() {
 
@@ -77,6 +80,8 @@ public class animeApplicationTest {
 
 	}
 
+    //Tests the process of creating a new Anime and persisting it to the database. The
+    //corresponding Get Method is also tested in this method.
     @Test
     public void addAnime() {
 
@@ -104,6 +109,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the process of creating a new Review and persisting it to the database. The
+    //corresponding Get Method is also tested in this method.
     @Test
     public void addReview() {
 
@@ -130,6 +137,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the process of creating a new Rating and persisting it to the database. The
+    //corresponding Get Method is also tested in this method.
     @Test
     public void addRating() {
 
@@ -156,6 +165,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the process of creating a new Forum and persisting it to the database. The
+    //corresponding Get Method is also tested in this method.
     @Test
     public void addForum() {
 
@@ -190,6 +201,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the process of creating a new Club and persisting it to the database. The
+    //corresponding Get Method is also tested in this method.
     @Test
     public void addClub() {
 
@@ -224,6 +237,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of updating a specific User contained within the
+    //database, like the above tests the associated get method is also tested.
     @Test
     public void updateUser() {
 
@@ -249,6 +264,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of updating a specific Anime contained within the
+    //database, like the above tests the associated get method is also tested.
     @Test
     public void updateAnime() {
 
@@ -275,6 +292,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of updating a specific Review contained within the
+    //database, like the above tests the associated get method is also tested.
     @Test
     public void updateReview() {
 
@@ -300,6 +319,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of updating a specific Rating contained within the
+    //database, like the above tests the associated get method is also tested.
     @Test
     public void updateRating() {
 
@@ -325,6 +346,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of updating a specific Forum contained within the
+    //database, like the above tests the associated get method is also tested.
     @Test
     public void updateForum() {
 
@@ -367,6 +390,8 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of updating a specific Club contained within the
+    //database, like the above tests the associated get method is also tested.
     @Test
     public void updateClub() {
 
@@ -408,6 +433,7 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of deleting a User from the database completely.
     @Test
     public void deleteUser() {
 
@@ -435,6 +461,7 @@ public class animeApplicationTest {
 
     }
 
+    //Tests the functionality of deleting a Anime from the database completely.
     @Test
     public void deleteAnime() {
 
@@ -462,8 +489,8 @@ public class animeApplicationTest {
 
     }
 
-
-        @Test
+    //Tests the functionality of deleting a Review from the database completely.
+    @Test
     public void deleteReview() {
 
         ReviewDTO review = new ReviewDTO(new Long(1), new Long(1), "hello");
@@ -490,7 +517,8 @@ public class animeApplicationTest {
             assertEquals(response.getStatus(), 404);
     }
 
-        @Test
+    //Tests the functionality of deleting a Rating from the database completely.
+    @Test
     public void deleteRating() {
 
         RatingDTO rating = new RatingDTO(new Long(1), new Long(1), "hello", new Long(100));
@@ -519,7 +547,8 @@ public class animeApplicationTest {
 
     }
 
-        @Test
+    //Tests the functionality of deleting a Forum from the database completely.
+    @Test
     public void deleteForum() {
 
         CommentDTO comment = new CommentDTO(new Long(1), "this is a comment", new Long(1900));
@@ -549,7 +578,8 @@ public class animeApplicationTest {
 
     }
 
-        @Test
+    //Tests the functionality of deleting a Club from the database completely.
+    @Test
     public void deleteClub() {
 
         CommentDTO comment = new CommentDTO(new Long(1), "this is a comment", new Long(1900));
@@ -584,6 +614,9 @@ public class animeApplicationTest {
             assertEquals(response.getStatus(), 404);
     }
 
+    //Tests the process of querying a range of club memembers of a given club stored
+    // within the database. Hateos link headers are tested here as well as the associated
+    //get method of the object.
     @Test
     public void queryRangeOfClubMembers() {
 
@@ -647,6 +680,9 @@ public class animeApplicationTest {
         assertEquals("<" + WEB_SERVICE_URI + "Club/1/members?start=0&size=1>; rel=\"prev\"", previous.toString());
     }
 
+    //Tests the process of querying a range of club forums of a given club stored
+    // within the database. Hateos link headers are tested here as well as the associated
+    //get method of the object.
     @Test
     public void queryRangeOfClubForums() {
 
@@ -710,6 +746,9 @@ public class animeApplicationTest {
         assertEquals("<" + WEB_SERVICE_URI + "Club/1/forums?start=0&size=1>; rel=\"prev\"", previous.toString());
     }
 
+    //Tests the process of querying a range of forum moderators of a given club stored
+    // within the database. Hateos link headers are tested here as well as the associated
+    //get method of the object.
     @Test
     public void queryRangeOfForumModerators() {
 
@@ -750,6 +789,10 @@ public class animeApplicationTest {
     }
 
 
+    //Tests the functionality of subscribing to Anime in a asynchronus manner, a client that is
+    //labeled as a subscriber is created, that client calls a subscribe method in the Anime
+    //resource class and is promptly subscribed to Anime. Another client then creates a new anime
+    //and this test checks to see if the subscriber is updated/notified as it should be.
     @Test
     public void testAsyncAnimeCreation(){
 

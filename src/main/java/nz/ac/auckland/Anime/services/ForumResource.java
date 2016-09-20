@@ -30,7 +30,7 @@ public class ForumResource {
     //only be updated if no moderators exist in the specified forum, OR the client who
     //is attempting to update the forum has previously logged in as a User who is a
     //moderator of the specific forum. This is checked by checking the clients cookie,
-    //one which is given to a client after logging in as a user. 
+    //one which is given to a client after logging in as a user.
     @PUT
     @Path ("{id}")
     @Consumes({"application/xml","application/json"})
