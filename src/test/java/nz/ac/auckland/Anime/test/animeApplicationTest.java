@@ -68,7 +68,7 @@ public class animeApplicationTest {
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"User").request()
-                .post(Entity.xml(user));
+                .post(Entity.json(user));
         if (response.getStatus() != 201) {
             fail("Failed to create new User");
         }
@@ -78,7 +78,7 @@ public class animeApplicationTest {
 
         // Query the Web service for the new User.
         UserDTO userFromService = _client.target(location).request()
-                .accept("application/xml").get(UserDTO.class);
+                .accept("application/json").get(UserDTO.class);
 
 
         assertEquals(user.getFirstname(), userFromService.getFirstname());
@@ -122,7 +122,7 @@ public class animeApplicationTest {
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"Review").request()
-                .post(Entity.xml(review));
+                .post(Entity.json(review));
         if (response.getStatus() != 201) {
             fail("Failed to create new Review");
         }
@@ -132,7 +132,7 @@ public class animeApplicationTest {
 
         // Query the Web service for the new User.
         ReviewDTO reviewFromService = _client.target(location).request()
-                .accept("application/xml").get(ReviewDTO.class);
+                .accept("application/json").get(ReviewDTO.class);
 
 
         assertEquals(review.getShowID(), reviewFromService.getShowID());
@@ -178,7 +178,7 @@ public class animeApplicationTest {
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"Forum").request()
-                .post(Entity.xml(forum));
+                .post(Entity.json(forum));
         if (response.getStatus() != 201) {
             fail("Failed to create new Forum");
         }
@@ -188,7 +188,7 @@ public class animeApplicationTest {
 
         // Query the Web service for the new User.
         ForumDTO forumFromService = _client.target(location).request()
-                .accept("application/xml").get(ForumDTO.class);
+                .accept("application/json").get(ForumDTO.class);
 
 
         assertEquals(forum.getAnimeTopicID(), forumFromService.getAnimeTopicID());
@@ -217,7 +217,7 @@ public class animeApplicationTest {
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"Club").request()
-                .post(Entity.xml(club));
+                .post(Entity.json(club));
         if (response.getStatus() != 201) {
             fail("Failed to create new Club");
         }
@@ -267,7 +267,7 @@ public class animeApplicationTest {
 
         Response response = _client
                 .target(WEB_SERVICE_URI+"Anime/1").request()
-                .put(Entity.xml(anime));
+                .put(Entity.json(anime));
         if (response.getStatus() != 204) {
             fail("Failed to create new Anime");
         }
@@ -276,7 +276,7 @@ public class animeApplicationTest {
 
         // Query the Web service for the new User.
         AnimeDTO animeFromService = _client.target(WEB_SERVICE_URI+"Anime/1").request()
-                .accept("application/xml").get(AnimeDTO.class);
+                .accept("application/json").get(AnimeDTO.class);
 
 
         assertEquals(anime.getEpisodes(), animeFromService.getEpisodes());
@@ -630,7 +630,7 @@ public class animeApplicationTest {
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
-        _logger.info(next);
+        _logger.info(next.toString());
         List<UserDTO> setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
         response.close();
 
@@ -693,7 +693,7 @@ public class animeApplicationTest {
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
-        _logger.info(next);
+        _logger.info(next.toString());
         List<ForumDTO> setOfForums = response.readEntity(new GenericType<List<ForumDTO>>() {});
         response.close();
 
@@ -732,7 +732,7 @@ public class animeApplicationTest {
         Link previous = response.getLink("prev");
         Link next = response.getLink("next");
 
-        _logger.info(next);
+        _logger.info(next.toString());
         List<UserDTO> setOfUsers = response.readEntity(new GenericType<List<UserDTO>>() {});
         response.close();
 
@@ -765,6 +765,12 @@ public class animeApplicationTest {
     public void testAsyncAnimeCreation(){
 
         Client subscriber = ClientBuilder.newClient( );
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Future<AnimeDTO> target1 = subscriber.target(WEB_SERVICE_URI+ "Anime/subscribe").request().async().get(new InvocationCallback<AnimeDTO>() {
             public void completed(AnimeDTO anime) {
